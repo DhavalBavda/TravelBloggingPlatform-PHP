@@ -1,6 +1,6 @@
 <?php
 
-include '../config/dbconfig.';
+include '../config/dbconfig.php';
 include '../helper/uuid_generator.php';
 
 
@@ -12,13 +12,13 @@ email varchar(30) unique not null,
 phone_number varchar(15) not null unique,
 password varchar(30) not null ,
 created_at timestamp default current_timestamp
-";
+)";
 
 
 $conn->query($userTable);
 
 if ($conn->query($userTable)==True){
-    echo " Kya Baat Hai Bhai Tu To Developer Nikala , Table Bana Diya Bhai , Pretty Impresive, Enjoy The User Table Bro.";
+    echo "<br/> Kya Baat Hai Bhai Tu To Developer Nikala , Table Bana Diya Bhai , Pretty Impresive, Enjoy The User Table Bro. <br/>";
 
 }
 
@@ -30,12 +30,14 @@ else {
 class UserModel{
 
     private $conn;
-    private $id;
+    
    
 
 
-    public function __construct($db) {
-        $this->conn = $db;
+    public function __construct() {
+        include '../config/dbconfig.php';
+
+        $this->conn = $conn;
     }
 
     public function insert_user($username,$email,$phone_number,$pass){
@@ -50,18 +52,62 @@ class UserModel{
         $stmt->bind_param('sssss',$id,$username,$email, $phone_number, $hashpassword);
 
         if($stmt->execute()){
-            return "Bhai User Create Ho Gaya Enjoy Kar !!";
+            return "Bhai User Create Ho Gaya Enjoy Kar !! <br/>";
 
         }
         else{
-            return "Bhai Tu Ek Simple USer Create Nahi Kar Sakta, Kya Code Banega Re Tu , Dekh Kya Kiya :- ".$stmt->error;
+            return "Bhai Tu Ek Simple USer Create Nahi Kar Sakta, Kya Code Banega Re Tu , Dekh Kya Kiya :- ".$stmt->error."<br/>";
         }
     }
     
+    public function get_user($id){
+        $sql = "select * From users where id= ?";
+
+        $stmt=$this->conn->prepare($sql);
+        $stmt->bind_param('s',$id);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+
+    }
+
+
+    public function update_user($id,$username,$phone_number){
+        $sql='update users set username=? , phone_number=? where id = ?';
+        $stmt=$this->conn->prepare($sql);
+        $stmt->bind_param('sss',$username,$phone_number,$id);
+
+        return $stmt->execute() ? "<br/> Bhai User Converted Kar Diya <br/>":"Bhai  Tu Nahi KAr Sakta Kyu ki :-".$stmt->error."<br/>";
+
+
+        
+        
+    }
+
 
     
 
 }
+
+///// Tesing For  Files 
+
+
+// $user = new UserModel();
+
+
+// // 1. user Create 
+// // echo $user->insert_user("Anu", "anu@example.com", "987652109788", "mypassword");
+
+// // 2. Read User (replace with actual UUID from DB after insert)
+// $someId = "ad0da06e-c8cc-441a-a213-475e527e754e"; 
+// // $data = $user->get_user($someId);
+// // if ($data) {
+// //     echo "<br/>  User Found: " . $data['username'] . " (" . $data['email'] . ")<br>";
+// // } else {
+// //     echo " User not found<br>";
+// // }
+
+// // 3. Update User
+// echo $user->update_user($someId, "Anu Updated", "999999999");
 
 
 ?>
