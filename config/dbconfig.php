@@ -28,8 +28,7 @@ else{
 
 }
 
-
-$conn->close();
+$conn->select_db($dbname)
 
 
 
