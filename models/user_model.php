@@ -30,14 +30,35 @@ else {
 class UserModel{
 
     private $conn;
+    private $id;
+   
+
 
     public function __construct($db) {
         $this->conn = $db;
     }
 
-    public function insert_user($usename,$email,$phone_number,$pass){
-        $id=
+    public function insert_user($username,$email,$phone_number,$pass){
+        $id=Generate_UUID();
+        $hashpassword=password_hash($pass,PASSWORD_BCRYPT);
+
+        $sql="insert into users (id, username, email, phone_number, password) 
+                VALUES (?, ?, ?, ?, ?)";
+
+        $stmt=$this->conn->prepare($sql);
+
+        $stmt->bind_param('sssss',$id,$username,$email, $phone_number, $hashpassword);
+
+        if($stmt->execute()){
+            return "Bhai User Create Ho Gaya Enjoy Kar !!";
+
+        }
+        else{
+            return "Bhai Tu Ek Simple USer Create Nahi Kar Sakta, Kya Code Banega Re Tu , Dekh Kya Kiya :- ".$stmt->error;
+        }
     }
+    
+
     
 
 }
