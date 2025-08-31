@@ -29,42 +29,68 @@ class BlogModel{
     }
 
         // GET ALL DATA WITH PAGINATION AND SINGLE BLOG DATA BY ID
-    public function get_blogs($blogid = '', $limit = 10, $offset = 0){
+    public function get_blogs($blogid = '', $limit = 10, $offset = 0, $search = ''){
         try {
             $stmt = NULL;
 
-            if($blogid == ''){
+            if ($blogid == '') {
 
-                // WITH PAGINATION
-                $stmt = $this->conn->prepare("SELECT * FROM BLOGS ORDER BY CREATEDDATE DESC LIMIT ? OFFSET ?");
-                $stmt->bind_param('ii', $limit, $offset);
-            }else{
+                if (!empty($search)) {
+
+                    $searchParam = "%" . $search . "%";
+
+                    $stmt = $this->conn->prepare(
+                        "SELECT b.*, u.username AS author_name
+                        FROM BLOGS b
+                        JOIN users u ON b.AUTHORID = u.id
+                        WHERE b.TITLE LIKE ? 
+                            OR b.SHORTDESC LIKE ?
+                            OR u.username LIKE ?
+                        ORDER BY b.CREATEDDATE DESC 
+                        LIMIT ? OFFSET ?"
+                    );
+                    $stmt->bind_param('sssii', $searchParam, $searchParam, $searchParam, $limit, $offset);
+
+                } else {
+
+                    $stmt = $this->conn->prepare(
+                        "SELECT b.*, u.username AS author_name
+                        FROM BLOGS b
+                        JOIN users u ON b.AUTHORID = u.id
+                        ORDER BY b.CREATEDDATE DESC 
+                        LIMIT ? OFFSET ?"
+                    );
+                    $stmt->bind_param('ii', $limit, $offset);
+
+                }
+            } else {
+
                 $stmt = $this->conn->prepare(
-                    "SELECT * FROM BLOGS WHERE BLOGID = ?"
+                    "SELECT b.*, u.username AS author_name
+                    FROM BLOGS b
+                    JOIN users u ON b.AUTHORID = u.id
+                    WHERE b.BLOGID = ?"
                 );
                 $stmt->bind_param('s', $blogid);
+
             }
 
-            if($stmt->execute()){
-                
+            if ($stmt->execute()) {
                 $result = $stmt->get_result();
 
                 if ($blogid == '') {
-                    // Return all blogs as an array
                     return $result->fetch_all(MYSQLI_ASSOC);
                 } else {
-                    // Return single blog row
                     return $result->fetch_assoc();
                 }
-            }
-            else{
-                
+            } else {
                 echo "Error executing query: " . $stmt->error;
                 return null;
             }
-
+            
         } catch (\Throwable $th) {
-            echo "Esception: ".$th->getMessage();
+            echo "Exception: " . $th->getMessage();
+            return null;
         }
     }
 

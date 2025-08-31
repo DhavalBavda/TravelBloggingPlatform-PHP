@@ -10,7 +10,7 @@ $offset = ($pageNum - 1) * $limit;
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 // Fetch blogs from service
-$blogsArr = $blogService->getAllBlogs('', $limit, $offset);
+$blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
 
 ?>
 
@@ -126,6 +126,8 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
     <a href="#" class="create-blog-btn">✍️ Create New Blog</a>
 
     <form class="search-bar" method="GET" action="">
+        <input type="hidden" name="page" value="blog">
+        <input type="hidden" name="action" value="get">
         <input type="text" name="search" placeholder="Search blogs..." value="<?= htmlspecialchars($search) ?>">
         <button type="submit">Search</button>
     </form>
