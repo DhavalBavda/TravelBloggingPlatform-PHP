@@ -84,7 +84,6 @@ switch($page){
         break;
 
     case 'blog':
-        $blogService = new BlogService($conn);
         if ($action === 'create'){ // http://localhost/Travel_Blogging_Platform/public/index.php?page=blog&action=create
             
             if(isset($_SESSION['userid'])){
@@ -97,6 +96,10 @@ switch($page){
         elseif ($action === 'get'){ // http://localhost/Travel_Blogging_Platform/public/index.php?page=blog&action=get&pageNo=1
 
             include __DIR__ . '/views/blog_listing.php';
+        }
+        elseif ($action === 'getbyid'){ // http://localhost/Travel_Blogging_Platform/public/index.php?page=blog&action=getbyid&id="id of the blog"
+
+            include __DIR__.'/views/read_blog.php';
         }
         break;
 

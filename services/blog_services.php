@@ -4,11 +4,11 @@ require_once __DIR__ . '/../services/user_services.php';
 
 class BlogService {
     private $blogModel;
-    private $userModel;
+    private $userService;
 
     public function __construct($conn) {
         $this->blogModel = new BlogModel($conn);
-        $this->userModel = new UserService($conn);
+        $this->userService = new UserService($conn);
     }
 
    
@@ -26,13 +26,22 @@ class BlogService {
     }
     
     public function getBlogById($id) {
-        return $this->blogModel->get_blogs($id);
+        $allblog = $this->blogModel->get_blogs($id);
+        
+        $authorId = $allblog['AUTHORID'];
+        if($authorId){
+            $allUsers = $this->userService->getUserById($authorId);
+            $allblog['author_name'] = $allUsers['username'] ?? 'Unknown';
+        }
+        else{
+            $allblog['author_name'] = 'Unknown';
+        }
+        return $allblog;
     }
 
     public function getAllBlogs($blogid = '', $limit = 10, $offset = 0){
         $allblog  = $this->blogModel->get_blogs($blogid, $limit, $offset);
-        $allUsers = $this->userModel->getAllUsers();
-
+        $allUsers = $this->userService->getAllUsers();
 
         // Build a quick lookup table of users by ID for faster access
         $userMap = [];

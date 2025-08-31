@@ -1,12 +1,15 @@
 <?php
 require_once __DIR__ . "/../models/comment_model.php";
+require_once __DIR__ . '/../services/user_services.php';
 
 class CommentService {
 
     private $commentModel;
+    private $userService;
 
     public function __construct($conn) {
         $this->commentModel = new CommentModel($conn);
+        $this->userService = new UserService($conn);
     }
 
     // Get comments of a specific blog
@@ -14,7 +17,25 @@ class CommentService {
         if (empty($blogid)) {
             throw new Exception("Blog ID is required.");
         }
-        return $this->commentModel->get_comment_byblogid($blogid, $limit, $offset);
+        
+        $allComment = $this->commentModel->get_comment_byblogid($blogid, $limit, $offset);
+        $allUsers = $this->userService->getAllUsers();
+
+        // Build a quick lookup table of users by ID for faster access
+        $userMap = [];
+        foreach ($allUsers as $user) {
+            $userMap[$user['id']] = $user['username']; // You can also store the full user if needed
+        }
+
+        // Attach username to each blog
+        foreach ($allComment as &$comment) {
+            $authorId = $comment['USERID'];
+
+            $comment['USERNAME'] = $userMap[$authorId] ?? 'Unknown';
+        }
+
+        return $allComment;
+
     }
 
     // Get all comments or single comment
