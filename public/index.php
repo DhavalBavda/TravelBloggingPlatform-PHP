@@ -14,7 +14,7 @@ switch($page){
             echo $userService->createUser("Testing User","test@example.com","999877776","habibi");
 
         } elseif ($action === 'profile') {
-            $userid = "5f055894-643c-4ec2-9267-da5e1208413b";
+            $userid = $id ?? null;
 
             $user = $userService->getUserById($userid);
 
@@ -31,6 +31,50 @@ switch($page){
             echo "Invalid action!";
         }
         break;
+    case 'auth':
+        if ($action === 'login') {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $email = $_POST['email'];
+                $password = $_POST['password'];
+                $user = $userService->loginUser($email, $password);
+
+                if ($user) {
+                    session_start();
+                    $_SESSION['user'] = $user;
+                   
+                    header("Location: index.php?page=users&action=profile&id=" . $user['id']);
+                    exit;
+                } else {
+                    echo "Invalid login!";
+                }
+            } else {
+                include __DIR__ . '/views/login.php';
+            }
+        } elseif ($action === 'register') {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                $result = $userService->registerUser(
+                    $_POST['username'],
+                    $_POST['email'],
+                    $_POST['phone'],
+                    $_POST['password']
+                );
+                if (strpos($result, 'successfully') !== false) {
+                    header("Location: index.php?page=auth&action=login");
+                    exit;
+                } else {
+            echo $result;
+        }
+            } else {
+                include __DIR__ . '/views/register.php';
+            }
+        } elseif ($action === 'logout') {
+            session_start();
+            session_destroy();
+            echo "Logged out successfully!";
+        }
+        break;
+
+
 
     default:
         echo "Page not found!";

@@ -22,7 +22,7 @@ class UserModel{
             username char(50) not null,
             email varchar(30) unique not null, 
             phone_number varchar(15) not null unique,
-            password varchar(30) not null ,
+            password varchar(255) not null ,
             created_at timestamp default current_timestamp
             )";
 
@@ -30,7 +30,7 @@ class UserModel{
             $conn->query($userTable);
 
             if ($conn->query($userTable)==True){
-                echo "<br/> Kya Baat Hai Bhai Tu To Developer Nikala , Table Bana Diya Bhai , Pretty Impresive, Enjoy The User Table Bro. <br/>";
+                //echo "<br/> Kya Baat Hai Bhai Tu To Developer Nikala , Table Bana Diya Bhai , Pretty Impresive, Enjoy The User Table Bro. <br/>";
 
             }
 
@@ -51,12 +51,15 @@ class UserModel{
 
         $stmt->bind_param('sssss',$id,$username,$email, $phone_number, $hashpassword);
 
-        if($stmt->execute()){
-            return "Bhai User Create Ho Gaya Enjoy Kar !! <br/>";
-
-        }
-        else{
-            return "Bhai Tu Ek Simple USer Create Nahi Kar Sakta, Kya Coder Banega Re Tu , Dekh Kya Kiya :- ".$stmt->error."<br/>";
+        try {
+            if($stmt->execute()){
+                return "User created successfully!";
+            }
+        } catch (mysqli_sql_exception $e) {
+            if ($e->getCode() == 1062) { 
+                return "Email or Phone number already exists!";
+            }
+            return "Error: " . $e->getMessage();
         }
     }
     
@@ -81,6 +84,20 @@ class UserModel{
 
         
         
+    }
+
+    public function login_user($identifier, $password) {
+        $sql = "SELECT * FROM users WHERE email = ? OR username = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('ss', $identifier, $identifier);
+        $stmt->execute();
+        $result = $stmt->get_result();
+        $user = $result->fetch_assoc();
+
+        if ($user && password_verify($password, $user['password'])) {
+            return $user;
+        }
+        return null;
     }
 
 

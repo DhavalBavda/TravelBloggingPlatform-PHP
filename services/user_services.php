@@ -21,5 +21,14 @@ class UserService {
     public function updateUser($id, $username, $phone_number) {
         return $this->userModel->update_user($id, $username, $phone_number);
     }
+
+    public function registerUser($username, $email, $phone, $password) {
+        return $this->userModel->insert_user($username, $email, $phone, $password);
+    }
+
+    public function loginUser($email, $password) {
+        return $this->userModel->login_user($email, $password);
+    }
+
 }
 ?>
