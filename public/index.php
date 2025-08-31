@@ -10,14 +10,17 @@ $page   = $_GET['page']   ?? null;
 $action = $_GET['action'] ?? null;
 $id     = $_GET['id']     ?? null;
 
-$userService = new UserService($conn); 
+$userService = new UserService($conn);
+$blogService=new BlogService($conn);
+
 
 switch($page){
     case 'users':
         
         if ($action === null) { //http://localhost/Travel_Blogging_Platform/public/index.php?page=users&id=9d062656-d275-4b67-950c-8185cad5f88f
-            $userid = "9d062656-d275-4b67-950c-8185cad5f88f";
+            $userid = $_SESSION['userid'];
             $user = $userService->getUserById($userid);
+             $blogs = $blogService->getBlogsByUserId($userid);
             include __DIR__ . '/views/user_profile.php';
         }
         break;

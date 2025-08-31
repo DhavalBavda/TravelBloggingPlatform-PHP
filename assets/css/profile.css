@@ -96,8 +96,7 @@ main {
   color: #3498db;
 }
 
-.comment-card,
-.blog-card {
+.comment-card {
   background-color: #fff;
   padding: 15px 20px;
   border-radius: 10px;
@@ -105,8 +104,7 @@ main {
   margin-bottom: 15px;
 }
 
-.comment-card button,
-.blog-card button {
+.comment-card button {
   padding: 6px 12px;
   border: none;
   background-color: #e74c3c;
@@ -117,21 +115,84 @@ main {
   margin-top: 10px;
 }
 
-.comment-card button:hover,
-.blog-card button:hover {
+.comment-card button:hover {
   background-color: #c0392b;
 }
+/* Blog Container */
+.blog-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 20px;
+  margin: 20px auto;
+  max-width: 1200px;
+  padding: 10px;
+}
 
-.blog-card a {
+/* Blog Card */
+.blog-card {
+  background: #fff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.blog-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+/* Blog Image */
+.blog-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Blog Content */
+.blog-content {
+  padding: 15px 20px;
+}
+
+.blog-title {
+  font-size: 1.4rem;
+  margin: 0 0 10px;
+  color: #333;
+}
+
+.blog-meta {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 12px;
+}
+
+.blog-meta span {
+  font-weight: 600;
+  color: #444;
+}
+
+.blog-excerpt {
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+/* Read More Button */
+.read-more {
   display: inline-block;
-  margin-top: 10px;
   text-decoration: none;
-  color: #3498db;
+  color: #fff;
+  background: #007bff;
+  padding: 8px 14px;
+  border-radius: 8px;
+  transition: background 0.3s ease;
 }
 
-.blog-card a:hover {
-  text-decoration: underline;
+.read-more:hover {
+  background: #0056b3;
 }
+
 
 /* Footer */
 footer {
@@ -156,4 +217,64 @@ footer {
   .user-info {
     text-align: center;
   }
+}
+ /* Popup Styles */
+    .popup {
+      display: none;
+      position: fixed;
+      z-index: 100;
+      left: 0; top: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+
+    .popup-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      width: 90%;
+      max-width: 400px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 25px;
+      cursor: pointer;
+    }
+
+    .popup-content input {
+      width: 100%;
+      padding: 8px;
+      margin: 8px 0;
+    }
+
+    .popup-content button {
+      padding: 10px 15px;
+      margin-top: 10px;
+    }
+    #editProfileBtn {
+  background: linear-gradient(135deg, #615359ff, #381118ff, #ff6a88);
+  color: white;
+  border: none;
+  padding: 12px 28px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(36, 5, 20, 0.4);
+  transition: all 0.3s ease-in-out;
+}
+
+#editProfileBtn:hover {
+  background: linear-gradient(135deg, #673c43ff, #3b2b32ff, #ecd3cfff);
+  box-shadow: 0 6px 20px rgba(95, 78, 87, 0.6);
+  transform: translateY(-2px) scale(1.05);
+}
+
+#editProfileBtn:active {
+  transform: scale(0.95);
+  box-shadow: 0 3px 10px rgba(75, 119, 169, 0.4);
 }

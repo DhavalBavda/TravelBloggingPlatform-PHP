@@ -21,11 +21,11 @@ class BlogModel{
             foreign key (AUTHORID) references users(ID) on delete cascade
         );";
 
-        if ($conn->query($blogTable)==True){
-            echo "Blog Table Created";
-        } else {
-            echo " Error creating table: ".$conn->error;
-        }
+        // if ($conn->query($blogTable)==True){
+        //     echo "Blog Table Created";
+        // } else {
+        //     echo " Error creating table: ".$conn->error;
+        // }
     }
 
         // GET ALL DATA WITH PAGINATION AND SINGLE BLOG DATA BY ID

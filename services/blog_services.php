@@ -18,6 +18,20 @@ class BlogService {
     //     return $this->blogModel->get_user($id);
     // }
 
+    // Get blogs by user id
+    public function getBlogsByUserId($userid, $limit = 0, $offset = 0) {
+        return $this->blogModel->get_blogs_byuserid($userid, $limit, $offset);
+    }
+
+        public function deleteBlog($blogid) {
+        return $this->blogModel->delete_blog($blogid);
+    }
+
+    
+    public function getblogById($id) {
+        return $this->blogModel->get_user($id);
+    }
+
     public function getAllBlogs($blogid = '', $limit = 10, $offset = 0){
         $allblog  = $this->blogModel->get_blogs($blogid, $limit, $offset);
         return $allblog ;
