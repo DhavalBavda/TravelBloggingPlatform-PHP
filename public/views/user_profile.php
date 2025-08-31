@@ -217,12 +217,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
                             <p class="blog-excerpt">
                                 <?= htmlspecialchars(substr($blog['SHORTDESC'], 0, 120)) . '...' ?>
                             </p>
+
+                            <div class="blog-buttons">
+                                <a href="?page=blog&action=getbyid&id=<?= htmlspecialchars($blog['BLOGID']) ?>" class="read-more-btn">Read More</a>
+                                
+                                <form method="POST" onsubmit="return confirmDelete('blog')">
+                                    <input type="hidden" name="deleteBlog" value="1">
+                                    <input type="hidden" name="blogid" value="<?= htmlspecialchars($blog['BLOGID']) ?>">
+                                    <button type="submit" class="delete-btn">🗑️ Delete Blog</button>
+                                </form>
+                                
+                            </div>
                             
-                            <form method="POST" onsubmit="return confirmDelete('blog')">
-                                <input type="hidden" name="deleteBlog" value="1">
-                                <input type="hidden" name="blogid" value="<?= htmlspecialchars($blog['BLOGID']) ?>">
-                                <button type="submit" class="delete-btn">🗑️ Delete Blog</button>
-                            </form>
                         </div>
                     </div>
                 <?php endforeach; ?>
