@@ -3,35 +3,25 @@ require_once __DIR__."/../config/dbconfig.php";
 require_once __DIR__."/../services/user_services.php";
 require_once __DIR__."/../services/blog_services.php";
 
-$page   = $_GET['page']   ?? 'users';
-$action = $_GET['action'] ?? 'profile';
+// ✅ Always start the session before using $_SESSION
+session_start();
+
+$page   = $_GET['page']   ?? null;
+$action = $_GET['action'] ?? null;
 $id     = $_GET['id']     ?? null;
 
 $userService = new UserService($conn); 
 
 switch($page){
     case 'users':
-        if ($action === 'create'){
-            echo $userService->createUser("Testing User","test@example.com","999877776","habibi");
 
-        } elseif ($action === 'profile') {
-            $userid = $id ?? null;
-
+        if ($action === null) {
+            $userid = "9d062656-d275-4b67-950c-8185cad5f88f";
             $user = $userService->getUserById($userid);
-
-            if ($user) {
                 include __DIR__ . '/views/user_profile.php';
-            } else {
-                echo "User not found!";
-            }
-
-        } elseif ($action === 'update') {
-            echo $userService->updateUser($id, "UpdatedName", "1234567890");
-
-        } else {
-            echo "Invalid action!";
         }
         break;
+
     case 'auth':
         if ($action === 'login') {
             if ($_SERVER['REQUEST_METHOD'] === 'POST') {

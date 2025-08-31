@@ -8,18 +8,19 @@ class UserService {
         $this->userModel = new UserModel($conn);
     }
 
-   
-    public function createUser($username, $email, $phone_number, $password) {
-        return $this->userModel->insert_user($username, $email, $phone_number, $password);
+    // Create user
+    public function createUser($username, $email, $phone_number, $password, $image = '') {
+        return $this->userModel->insert_user($username, $email, $phone_number, $password, $image);
     }
 
-    
+    // Get user by ID
     public function getUserById($id) {
         return $this->userModel->get_user($id);
     }
 
-    public function updateUser($id, $username, $phone_number) {
-        return $this->userModel->update_user($id, $username, $phone_number);
+    // Update user with optional profile image
+    public function updateUser($id, $username, $phone_number, $image = null) {
+        return $this->userModel->update_user($id, $username, $phone_number, $image);
     }
 
     public function registerUser($username, $email, $phone, $password) {
