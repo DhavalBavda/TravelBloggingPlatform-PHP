@@ -1,5 +1,5 @@
 <?php
-session_start();
+
 require_once __DIR__ . "/../../config/dbconfig.php";
 require_once __DIR__ . "/../../services/user_services.php";
 

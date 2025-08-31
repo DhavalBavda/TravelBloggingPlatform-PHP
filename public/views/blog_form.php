@@ -5,7 +5,14 @@ require_once __DIR__."/../../services/blog_services.php";
 $uploadDir = __DIR__ . "/../../media/blog_images/";
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $userid    = $_POST['userid'] ?? $_SESSION['userid'];
+    // $userid    = $_POST['userid'] ?? $_SESSION['userid'] ?? null;
+
+    // if (!$userid) {
+    //     header("Location: /index.php?page=login");
+    //     exit;
+    // }
+    // $userid    = null;
+    $userid    = "9d062656-d275-4b67-950c-8185cad5f88f";
     $title     = $_POST['title'] ?? null;
     $shortdesc = $_POST['shortdesc'] ?? null;
     $content   = $_POST['content'] ?? null;
@@ -68,10 +75,7 @@ function limitFiles(input, maxFiles) {
 <div class="container">
     <h2>Create Your Blog</h2>
     <form action="" method="post" enctype="multipart/form-data">
-        <!-- <div class="form-group">
-            <label for="userid">UserId:</label>
-            <input type="text" name="userid" value="<?php echo $_SESSION['userid'] ?? 1; ?>">
-        </div> -->
+
 
         <div class="form-group">
             <label for="title">Title:</label>

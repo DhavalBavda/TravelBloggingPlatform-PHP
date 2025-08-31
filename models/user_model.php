@@ -24,6 +24,14 @@ class UserModel{
         $this->conn->query($userTable);
     }
 
+    // Get all the users
+    public function get_allusers(){
+        $sql = "SELECT * FROM users";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->get_result()->fetch_assoc();
+    }
+    
     // Insert user with optional profile image
     public function insert_user($username, $email, $phone_number, $pass, $image = '') {
         $id = Generate_UUID();
@@ -67,6 +75,10 @@ class UserModel{
         $stmt->execute();
         $result = $stmt->get_result();
         $user = $result->fetch_assoc();
+
+        print_r($user);
+
+        echo password_hash($password, PASSWORD_BCRYPT);
 
         if ($user && password_verify($password, $user['password'])) {
             return $user;

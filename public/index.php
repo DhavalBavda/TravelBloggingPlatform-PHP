@@ -14,11 +14,11 @@ $userService = new UserService($conn);
 
 switch($page){
     case 'users':
-
-        if ($action === null) {
+        
+        if ($action === null) { //http://localhost/Travel_Blogging_Platform/public/index.php?page=users&id=9d062656-d275-4b67-950c-8185cad5f88f
             $userid = "9d062656-d275-4b67-950c-8185cad5f88f";
             $user = $userService->getUserById($userid);
-                include __DIR__ . '/views/user_profile.php';
+            include __DIR__ . '/views/user_profile.php';
         }
         break;
 
@@ -30,10 +30,9 @@ switch($page){
                 $user = $userService->loginUser($email, $password);
 
                 if ($user) {
-                    session_start();
-                    $_SESSION['user'] = $user;
+                    $_SESSION['userid'] = $user['id'];
                    
-                    header("Location: index.php?page=users&action=profile&id=" . $user['id']);
+                    header("Location: index.php?page=users&id=" . $user['id']);
                     exit;
                 } else {
                     echo "Invalid login!";
@@ -59,7 +58,6 @@ switch($page){
                 include __DIR__ . '/views/register.php';
             }
         } elseif ($action === 'logout') {
-            session_start();
             session_destroy();
             echo "Logged out successfully!";
         }
@@ -73,13 +71,21 @@ switch($page){
             include __DIR__.'/views/landing.php';
         }
         break;
-        
-    case 'blog':
-        if ($action === 'create'){ // http://localhost/Travel_Blogging_Platform/public/index.php?page=blog&action=create
-            $blogService = new BlogService($conn);
 
-            include __DIR__ . '/views/blog_form.php';
-        
+    case 'blog':
+        $blogService = new BlogService($conn);
+        if ($action === 'create'){ // http://localhost/Travel_Blogging_Platform/public/index.php?page=blog&action=create
+            
+            if(isset($_SESSION['userid'])){
+                include __DIR__ . '/views/blog_form.php';
+            }
+            else{
+                include __DIR__ . '/views/blog_form.php';
+            }
+        }
+        elseif ($action === 'get'){ // http://localhost/Travel_Blogging_Platform/public/index.php?page=blog&action=get&pageNo=1
+
+            include __DIR__ . '/views/blog_listing.php';
         }
         break;
 
