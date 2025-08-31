@@ -20,7 +20,7 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog List</title>
+    <title>Blogs</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&family=Dancing+Script&display=swap" rel="stylesheet">
     <link rel ="stylesheet" href="../assets/css/blog_listing.css">
 
@@ -177,8 +177,8 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
         <div class="footer-links">
             <h4>Quick Links</h4>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Blogs</a></li>
+                <li><a href="?page=home&action=get">Home</a></li>
+                <li><a href="?page=blog&action=get">Blogs</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
             </ul>
