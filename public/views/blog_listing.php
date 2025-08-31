@@ -97,8 +97,13 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
 <body>
 
 <header class="navbar">
-    <nav>
-        <ul>
+    <nav class = "navbar-container">
+        
+        <div class="navbar-brand">
+            <a href="?page=home&action=get">Travelogue</a>
+        </div>
+
+        <ul class = "navbar-links">
             <li><a href="?page=home&action=get">Home</a></li>
             <?php if ($isLoggedIn): ?>
                 <li><button class="user-profile-btn" data-user-id="<?= htmlspecialchars($_SESSION['userid']) ?>" >PROFILE</button></li>

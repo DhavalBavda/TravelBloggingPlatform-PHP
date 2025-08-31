@@ -10,24 +10,42 @@ body {
     line-height: 1.6;
 }
 .navbar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 15px 40px;
     background: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 15px 40px;
 }
-.navbar ul {
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.navbar-brand a {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #46816b;
+    text-decoration: none;
+}
+.navbar-links {
     display: flex;
     gap: 20px;
     list-style: none;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
-.navbar a {
+
+.navbar-links a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
+    transition: color 0.3s ease;
 }
+
+.navbar-links a:hover {
+    color: #46816b;
+}
+
 .user-profile-btn {
     background: linear-gradient(135deg, #46816b, #5a9b7e);
     color: #fff;
