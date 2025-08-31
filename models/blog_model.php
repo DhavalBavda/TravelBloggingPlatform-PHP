@@ -22,9 +22,9 @@ class BlogModel{
         );";
 
         if ($conn->query($blogTable)==True){
-            echo "Blog Table Created";
+            // echo "Blog Table Created";
         } else {
-            echo " Error creating table: ".$conn->error;
+            // echo " Error creating table: ".$conn->error;
         }
     }
 

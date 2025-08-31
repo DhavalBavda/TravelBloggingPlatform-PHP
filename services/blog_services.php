@@ -1,11 +1,14 @@
 <?php
 require_once __DIR__ . '/../models/blog_model.php';
+require_once __DIR__ . '/../services/user_services.php';
 
 class BlogService {
     private $blogModel;
+    private $userModel;
 
     public function __construct($conn) {
         $this->blogModel = new BlogModel($conn);
+        $this->userModel = new UserService($conn);
     }
 
    
@@ -20,6 +23,22 @@ class BlogService {
 
     public function getAllBlogs($blogid = '', $limit = 10, $offset = 0){
         $allblog  = $this->blogModel->get_blogs($blogid, $limit, $offset);
+        $allUsers = $this->userModel->getAllUsers();
+
+
+        // Build a quick lookup table of users by ID for faster access
+        $userMap = [];
+        foreach ($allUsers as $user) {
+            $userMap[$user['id']] = $user['username']; // You can also store the full user if needed
+        }
+
+        // Attach username to each blog
+        foreach ($allblog as &$blog) {
+            $authorId = $blog['AUTHORID'];
+
+            $blog['author_name'] = $userMap[$authorId] ?? 'Unknown';
+        }
+
         return $allblog ;
     }
 

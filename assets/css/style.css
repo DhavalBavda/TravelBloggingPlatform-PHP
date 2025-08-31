@@ -16,14 +16,17 @@ body {
 .navbar {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     padding: 15px 40px;
     background: #f9f9f9;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
 }
 
 .navbar ul {
     display: flex;
     gap: 20px;
     list-style: none;
+    align-items: center;
 }
 
 .navbar a {
@@ -39,6 +42,12 @@ body {
     padding: 6px 14px;
     border-radius: 8px;
     cursor: pointer;
+}
+
+.login-btn:hover {
+    background: #3a6b5a;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 8px rgba(70, 129, 107, 0.3);
 }
 
 .hero {

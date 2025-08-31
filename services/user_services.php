@@ -8,6 +8,11 @@ class UserService {
         $this->userModel = new UserModel($conn);
     }
 
+    //Get all users
+    public function getAllUsers(){
+        return $this->userModel->get_allusers();
+    }
+
     // Create user
     public function createUser($username, $email, $phone_number, $password, $image = '') {
         return $this->userModel->insert_user($username, $email, $phone_number, $password, $image);
