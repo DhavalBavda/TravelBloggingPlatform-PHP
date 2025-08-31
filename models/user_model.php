@@ -35,7 +35,7 @@ class UserModel{
             }
 
             else {
-                echo " Error Bro Dekh Tune Kya Kiya , Coding Nahi AAti To Mat Kiya Karna ".$conn->error;
+                //echo " Error Bro Dekh Tune Kya Kiya , Coding Nahi AAti To Mat Kiya Karna ".$conn->error;
 
             }
         }

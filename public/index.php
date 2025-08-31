@@ -1,6 +1,7 @@
 <?php
 require_once __DIR__."/../config/dbconfig.php";
 require_once __DIR__."/../services/user_services.php";
+require_once __DIR__."/../services/blog_services.php";
 
 $page   = $_GET['page']   ?? 'users';
 $action = $_GET['action'] ?? 'profile';
@@ -75,6 +76,22 @@ switch($page){
         break;
 
 
+
+    case 'home':
+        if ($action === 'get'){
+            http://localhost/Travel_Blogging_Platform/public/index.php?page=home&action=get
+            include __DIR__.'/views/landing.php';
+        }
+        break;
+        
+    case 'blog':
+        if ($action === 'create'){ // http://localhost/Travel_Blogging_Platform/public/index.php?page=blog&action=create
+            $blogService = new BlogService($conn);
+
+            include __DIR__ . '/views/blog_form.php';
+        
+        }
+        break;
 
     default:
         echo "Page not found!";

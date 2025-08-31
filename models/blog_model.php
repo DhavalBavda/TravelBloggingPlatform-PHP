@@ -1,35 +1,34 @@
 <?php
 
-include "../config/dbconfig.php";
-include "../helper/uuid_generator.php";
-
-$blogTable="CREATE TABLE IF NOT EXISTS blogs(
-	BLOGID char(36) primary key,
-	AUTHORID char(36) not null,
-	TITLE varchar(255) not null,
-	SHORTDESC text not null,
-	CONTENT longtext,
-	IMAGES varchar(255),
-	CREATEDDATE datetime default current_timestamp,
-	TOTALCOMMENTS int default 0,
-	foreign key (AUTHORID) references users(ID) on delete cascade
-);";
-
-if ($conn->query($blogTable)==True){
-    echo "Blog Table Created";
-} else {
-    echo " Error creating table: ".$conn->error;
-}
+require_once __DIR__."/../helper/uuid_generator.php";
 
 class BlogModel{
     private $conn;
 
-    public function __construct() {
-        include '../config/dbconfig.php';
+    public function __construct($conn) {
+
         $this->conn = $conn;
+
+        $blogTable="CREATE TABLE IF NOT EXISTS blogs(
+            BLOGID char(36) primary key,
+            AUTHORID char(36) not null,
+            TITLE varchar(255) not null,
+            SHORTDESC text not null,
+            CONTENT longtext,
+            IMAGES varchar(255),
+            CREATEDDATE datetime default current_timestamp,
+            TOTALCOMMENTS int default 0,
+            foreign key (AUTHORID) references users(ID) on delete cascade
+        );";
+
+        if ($conn->query($blogTable)==True){
+            echo "Blog Table Created";
+        } else {
+            echo " Error creating table: ".$conn->error;
+        }
     }
 
-    // GET ALL DATA WITH PAGINATION AND SINGLE BLOG DATA BY ID
+        // GET ALL DATA WITH PAGINATION AND SINGLE BLOG DATA BY ID
     public function get_blogs($blogid = '', $limit = 10, $offset = 0){
         try {
             $stmt = NULL;
@@ -69,7 +68,7 @@ class BlogModel{
         }
     }
 
-    // GET USER WISE DATA WITH PAGINATION AND SINGLE BLOG DATA BY ID
+        // GET USER WISE DATA WITH PAGINATION AND SINGLE BLOG DATA BY ID
     public function get_blogs_byuserid($authorid, $limit = 0, $offset = 0){
         try {
             $stmt = NULL;
@@ -106,7 +105,7 @@ class BlogModel{
         }
     }
 
-    // INSERT DATA
+        // INSERT DATA
     public function insert_blog($authorid, $title, $shortdesc, $content, $images = ''){
         try {
 
@@ -126,7 +125,7 @@ class BlogModel{
         }
     }
 
-    // UPDATE DATA
+        // UPDATE DATA
     public function update_blog($blogid, $title, $shortdesc, $content, $images ){
         try {
             $stmt = $this->conn->prepare(
@@ -151,7 +150,7 @@ class BlogModel{
         }
     }
 
-    // DELETE DATA
+        // DELETE DATA
     public function delete_blog($blogid){
         try {
             
