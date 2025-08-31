@@ -29,7 +29,19 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="index.php?page=auth&action=login"><button class="login-btn">Login</button></a></li>
+                <?php if (isset($_SESSION['userid'])): ?>
+                    <li>
+                        <a href="index.php?page=auth&action=logout">
+                            <button class="login-btn">Logout</button>
+                        </a>
+                    </li>
+                <?php else: ?>
+                    <li>
+                        <a href="index.php?page=auth&action=login">
+                            <button class="login-btn">Login</button>
+                        </a>
+                    </li>
+                <?php endif; ?>
             </ul>
         </nav>
     </header>

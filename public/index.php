@@ -70,7 +70,8 @@ switch($page){
             }
         } elseif ($action === 'logout') {
             session_destroy();
-            echo "Logged out successfully!";
+            header("Location: index.php?page=home&action=get");
+            exit;
         }
         break;
 
