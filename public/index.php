@@ -34,11 +34,10 @@ switch($page){
         break;
 
     case 'blog':
-        if ($action === 'create'){
+        if ($action === 'create'){ // http://localhost/Travel_Blogging_Platform/public/index.php?page=blog&action=create
+            $blogService = new BlogService($conn);
 
             include __DIR__ . '/views/blog_form.php';
-        
-            // echo "User not found!";
         
         }
         break;

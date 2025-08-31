@@ -9,7 +9,7 @@ class BlogService {
     }
 
    
-    public function createBlog($userid, $title, $shortdesc, $content, $images) {
+    public function createBlog($userid, $title, $shortdesc, $content, $images = '') {
         return $this->blogModel->insert_blog($userid, $title, $shortdesc, $content, $images);
     }
 
