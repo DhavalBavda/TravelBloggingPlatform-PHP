@@ -1,31 +1,8 @@
 <?php
 
-include '../config/dbconfig.php';
 include '../helper/uuid_generator.php';
 
 
-
-$userTable="create table if not exists users(
-id char(36) primary key,
-username char(50) not null,
-email varchar(30) unique not null, 
-phone_number varchar(15) not null unique,
-password varchar(30) not null ,
-created_at timestamp default current_timestamp
-)";
-
-
-$conn->query($userTable);
-
-if ($conn->query($userTable)==True){
-    echo "<br/> Kya Baat Hai Bhai Tu To Developer Nikala , Table Bana Diya Bhai , Pretty Impresive, Enjoy The User Table Bro. <br/>";
-
-}
-
-else {
-    echo " Error Bro Dekh Tune Kya Kiya , Coding Nahi AAti To Mat Kiya Karna ".$conn->error;
-
-}
 
 class UserModel{
 
@@ -34,11 +11,34 @@ class UserModel{
    
 
 
-    public function __construct() {
-        include '../config/dbconfig.php';
+    public function __construct($conn) {
+        
 
         $this->conn = $conn;
-    }
+                    
+
+        $userTable="create table if not exists users(
+            id char(36) primary key,
+            username char(50) not null,
+            email varchar(30) unique not null, 
+            phone_number varchar(15) not null unique,
+            password varchar(30) not null ,
+            created_at timestamp default current_timestamp
+            )";
+
+
+            $conn->query($userTable);
+
+            if ($conn->query($userTable)==True){
+                echo "<br/> Kya Baat Hai Bhai Tu To Developer Nikala , Table Bana Diya Bhai , Pretty Impresive, Enjoy The User Table Bro. <br/>";
+
+            }
+
+            else {
+                echo " Error Bro Dekh Tune Kya Kiya , Coding Nahi AAti To Mat Kiya Karna ".$conn->error;
+
+            }
+        }
 
     public function insert_user($username,$email,$phone_number,$pass){
         $id=Generate_UUID();
@@ -56,7 +56,7 @@ class UserModel{
 
         }
         else{
-            return "Bhai Tu Ek Simple USer Create Nahi Kar Sakta, Kya Code Banega Re Tu , Dekh Kya Kiya :- ".$stmt->error."<br/>";
+            return "Bhai Tu Ek Simple USer Create Nahi Kar Sakta, Kya Coder Banega Re Tu , Dekh Kya Kiya :- ".$stmt->error."<br/>";
         }
     }
     
