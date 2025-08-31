@@ -31,7 +31,7 @@
                 <li><a href="#">Home</a></li>
                 <li><a href="#">About</a></li>
                 <li><a href="#">Contact</a></li>
-                <li><button class="login-btn">Login</button></li>
+                <li><a href="index.php?page=auth&action=login"><button class="login-btn">Login</button></a></li>
             </ul>
         </nav>
     </header>
