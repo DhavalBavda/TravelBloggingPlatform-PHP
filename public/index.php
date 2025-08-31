@@ -22,14 +22,16 @@ switch($page){
         
         if ($action === null) { //http://localhost/Travel_Blogging_Platform/public/index.php?page=users&id=9d062656-d275-4b67-950c-8185cad5f88f
             $userid = $_SESSION['userid'];
-            $user = $userService->getUserById($userid);
-             $blogs = $blogService->getBlogsByUserId($userid);
-             $comments = $commentService->getCommentsByUser($userid);
 
-
-             
-
-            include __DIR__ . '/views/user_profile.php';
+            if($userid){
+                $user = $userService->getUserById($userid);
+                $blogs = $blogService->getBlogsByUserId($userid);
+                $comments = $commentService->getCommentsByUser($userid);
+                include __DIR__ . '/views/user_profile.php';
+            }
+            else{
+                include __DIR__ . '/views/login.php';
+            }
         }
         break;
 

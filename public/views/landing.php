@@ -18,18 +18,6 @@ $isLoggedIn = isset($_SESSION['userid']);
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/css/style.css">
-    <style>
-      
-.logout-btn {
-  background: #4b8378;
-  color: white;
-  border: none;
-  padding: 14px 35px;
-  border-radius: 25px;
-  font-size: 18px;
-  cursor: pointer;
-}
-    </style>
     <script>
 		const isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
 		document.addEventListener('DOMContentLoaded', () => {
@@ -43,38 +31,43 @@ $isLoggedIn = isset($_SESSION['userid']);
 			}
 
 
-		if (isLoggedIn) {
-			const profileBtn = document.querySelector('#user-profile-btn');
-			if (profileBtn) {
-				profileBtn.addEventListener('click', function(e) {
-					e.preventDefault();
-					const userId = profileBtn.getAttribute('data-user-id');
-					if (userId) {
-						window.location.href = `index.php?page=users&id=${userId}`;
-					} else {
-						alert("User ID not found.");
-					}
-				});
+			if (isLoggedIn) {
+				const profileBtn = document.querySelector('#user-profile-btn');
+				if (profileBtn) {
+					profileBtn.addEventListener('click', function(e) {
+						e.preventDefault();
+						const userId = profileBtn.getAttribute('data-user-id');
+						if (userId) {
+							window.location.href = `index.php?page=users&id=${userId}`;
+						} else {
+							alert("User ID not found.");
+						}
+					});
+				}
+
+				const logoutBtn = document.querySelector('#logout-btn-id');
+				if (logoutBtn) {
+					logoutBtn.addEventListener('click', function(e) {
+						e.preventDefault();
+						
+						window.location.href = "?page=auth&action=logout";
+						
+					});
+				}
 			}
 
-			const logoutBtn = document.querySelector('#logout-btn-id');
-			if (logoutBtn) {
-				logoutBtn.addEventListener('click', function(e) {
-					e.preventDefault();
-					
-					window.location.href = "?page=auth&action=logout";
-					
-				});
-			}
-		}
-
-	});
+		});
     </script>
 </head>
 <body>
     <header class="navbar">
-        <nav>
-            <ul>
+        <nav class="navbar-container">
+			
+			<div class="navbar-brand">
+				<a href="?page=home&action=get">Travelogue</a>
+			</div>
+      
+            <ul class="navbar-links">
                 <li><a href="#">Home</a></li>
                 <?php if ($isLoggedIn): ?>
 					<li>

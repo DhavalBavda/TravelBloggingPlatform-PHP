@@ -12,42 +12,63 @@ body {
     line-height: 1.6;
 }
 
-
 .navbar {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    padding: 15px 40px;
     background: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    padding: 15px 40px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 
-.navbar ul {
+.navbar-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar-brand a {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    font-weight: 600;
+    color: #46816b;
+    text-decoration: none;
+}
+
+.navbar-links {
     display: flex;
     gap: 20px;
     list-style: none;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
-.navbar a {
+.navbar-links a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
+    transition: color 0.3s ease;
+}
+.navbar-links a:hover {
+    color: #46816b;
 }
 
-.login-btn {
+.navbar-links button,
+.navbar-links .login-btn {
     background: #46816b;
     color: #fff;
     border: none;
-    padding: 6px 14px;
-    border-radius: 8px;
+    border-radius: 25px;
+    padding: 8px 20px;
     cursor: pointer;
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: background 0.3s ease;
 }
-
-.login-btn:hover {
-    background: #3a6b5a;
-    transform: translateY(-1px);
-    box-shadow: 0 2px 8px rgba(70, 129, 107, 0.3);
+.navbar-links button:hover,
+.navbar-links .login-btn:hover {
+    background: #356554;
 }
 
 .hero {
@@ -190,6 +211,7 @@ body {
 .footer-about h3 {
   font-size: 1.8rem;
   margin-bottom: 10px;
+  color: #46816b;
 }
 .footer-links h4, 
 .footer-social h4 {
