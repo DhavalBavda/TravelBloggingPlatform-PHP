@@ -132,6 +132,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
                         PROFILE
                     </button>
                 </li>
+                <li>
+                    <button id="logout-btn-id" class="user-profile-btn">LOGOUT</button>
+                </li>
             <?php else: ?>
                 <li><button class="login-btn">Login</button></li>
             <?php endif; ?>
@@ -426,6 +429,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
         blogCards.forEach(card => {
             card.dataset.currentImage = '0';
         });
+
+        const logoutBtn = document.querySelector('#logout-btn-id');
+        if (logoutBtn) {
+            logoutBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                window.location.href = "?page=auth&action=logout";
+                
+            });
+        }
     });
 </script>
 

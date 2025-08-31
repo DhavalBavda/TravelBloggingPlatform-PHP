@@ -1,3 +1,11 @@
+<?php
+
+$isLoggedIn = isset($_SESSION['userid']);
+
+
+
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,7 +18,20 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="../assets/css/style.css">
+    <style>
+      
+.logout-btn {
+  background: #4b8378;
+  color: white;
+  border: none;
+  padding: 14px 35px;
+  border-radius: 25px;
+  font-size: 18px;
+  cursor: pointer;
+}
+    </style>
     <script>
+		const isLoggedIn = <?php echo json_encode($isLoggedIn); ?>;
 		document.addEventListener('DOMContentLoaded', () => {
 
 			const exploreBtn = document.querySelector('.explore-btn');
@@ -21,7 +42,33 @@
 				});
 			}
 
-		});
+
+		if (isLoggedIn) {
+			const profileBtn = document.querySelector('#user-profile-btn');
+			if (profileBtn) {
+				profileBtn.addEventListener('click', function(e) {
+					e.preventDefault();
+					const userId = profileBtn.getAttribute('data-user-id');
+					if (userId) {
+						window.location.href = `index.php?page=users&id=${userId}`;
+					} else {
+						alert("User ID not found.");
+					}
+				});
+			}
+
+			const logoutBtn = document.querySelector('#logout-btn-id');
+			if (logoutBtn) {
+				logoutBtn.addEventListener('click', function(e) {
+					e.preventDefault();
+					
+					window.location.href = "?page=auth&action=logout";
+					
+				});
+			}
+		}
+
+	});
     </script>
 </head>
 <body>
@@ -29,7 +76,19 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="index.php?page=auth&action=login"><button class="login-btn">Login</button></a></li>
+                <?php if ($isLoggedIn): ?>
+					<li>
+						<button class="logout-btn" id="user-profile-btn" data-user-id="<?= htmlspecialchars($_SESSION['userid']) ?>">
+							PROFILE
+						</button>
+					</li>
+					<li>
+						<button id="logout-btn-id" class="logout-btn">LOGOUT</button>
+					</li>
+            	<?php else: ?>
+					<li><a href="index.php?page=auth&action=login"><button class="login-btn">Login</button></a></li>
+            	<?php endif; ?>
+
             </ul>
         </nav>
     </header>

@@ -45,7 +45,6 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
                 const profileBtn = document.querySelector('.user-profile-btn');
                 if (profileBtn) {
                     profileBtn.addEventListener('click', function(e) {
-                        console.log("inge");
                         e.preventDefault();
                         const userId = profileBtn.getAttribute('data-user-id');
                         if (userId) {
@@ -55,6 +54,17 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
                         }
                     });
                 }
+
+                const logoutBtn = document.querySelector('#logout-btn-id');
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        window.location.href = "?page=auth&action=logout";
+                        
+                    });
+                }
+
             }
             else{
                 const loginBtn = document.querySelector('.login-btn');
@@ -92,6 +102,9 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
             <li><a href="?page=home&action=get">Home</a></li>
             <?php if ($isLoggedIn): ?>
                 <li><button class="user-profile-btn" data-user-id="<?= htmlspecialchars($_SESSION['userid']) ?>" >PROFILE</button></li>
+                <li>
+                    <button id="logout-btn-id" class="user-profile-btn">LOGOUT</button>
+                </li>
             <?php else: ?>
                 <li><button class="login-btn">Login</button></li>
             <?php endif; ?>

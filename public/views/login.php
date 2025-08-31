@@ -7,12 +7,20 @@
 <body>
     <div class="login-box">
         <h2>Login</h2>
-        <form method="post" action="index.php?page=auth&action=login">
+        <form method="post" action="index.php?page=auth&action=login" id = "loginForm">
             <input type="text" name="email" placeholder="Email or Username" required><br>
             <input type="password" name="password" placeholder="Password" required><br>
             <button type="submit">Login</button>
         </form>
         <p>New user? Register <a href="index.php?page=auth&action=register">here</a></p>
     </div>
+
+    <script>
+        // Clear previous input values on page load
+        window.addEventListener('DOMContentLoaded', () => {
+            const form = document.getElementById('loginForm');
+            if (form) form.reset();
+        });
+    </script>
 </body>
 </html>
