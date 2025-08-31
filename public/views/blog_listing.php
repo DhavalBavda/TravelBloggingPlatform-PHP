@@ -90,8 +90,6 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
     <nav>
         <ul>
             <li><a href="?page=home&action=get">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
             <?php if ($isLoggedIn): ?>
                 <li><button class="user-profile-btn" data-user-id="<?= htmlspecialchars($_SESSION['userid']) ?>" >PROFILE</button></li>
             <?php else: ?>
@@ -130,10 +128,10 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
                         <?php endforeach; ?>
                     </div>
                     <div class="blog-content">
-                        <div class="blog-meta">By <?= htmlspecialchars($blog['author_name']) ?> • <?= htmlspecialchars($blog['CREATEDDATE']) ?></div>
+                        <div class="blog-meta">By <span><?= htmlspecialchars($blog['author_name']) ?></span> • <?= htmlspecialchars($blog['CREATEDDATE']) ?></div>
                         <h3><?= htmlspecialchars($blog['TITLE']) ?></h3>
                         <p><?= htmlspecialchars($blog['SHORTDESC']) ?></p>
-                        <a href="" class="read-more">Read More</a>
+                        <a href="?page=blog&action=getbyid&id=<?=$blog['BLOGID']?>" class="read-more">Read More</a>
                     </div>
                 </div>
             <?php endforeach; ?>
@@ -179,8 +177,6 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
             <ul>
                 <li><a href="?page=home&action=get">Home</a></li>
                 <li><a href="?page=blog&action=get">Blogs</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
             </ul>
         </div>
         <div class="footer-social">

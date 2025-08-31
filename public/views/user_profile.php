@@ -125,8 +125,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
         <h3 class="logo">Travelogue</h3>
         <ul>
             <li><a href="?page=home&action=get">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
             <?php if ($isLoggedIn): ?>
                 <li>
                     <button class="user-profile-btn" 
@@ -302,10 +300,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
         <div class="footer-links">
             <h4>Quick Links</h4>
             <ul>
-                <li><a href="#">Home</a></li>
-                <li><a href="#">Blogs</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
+                <li><a href="?page=home&action=get">Home</a></li>
+                <li><a href="?page=blog&action=get">Blogs</a></li>
             </ul>
         </div>
         <div class="footer-social">

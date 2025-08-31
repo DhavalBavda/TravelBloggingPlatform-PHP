@@ -29,8 +29,6 @@
         <nav>
             <ul>
                 <li><a href="#">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Contact</a></li>
                 <li><a href="index.php?page=auth&action=login"><button class="login-btn">Login</button></a></li>
             </ul>
         </nav>
@@ -102,8 +100,6 @@
           <ul>
             <li><a href="?page=home&action=get">Home</a></li>
             <li><a href="?page=blog&action=get">Blogs</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Contact</a></li>
           </ul>
         </div>
         <div class="footer-social">
