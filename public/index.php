@@ -70,7 +70,7 @@ switch($page){
 
     case 'home':
         if ($action === 'get'){
-            http://localhost/Travel_Blogging_Platform/public/index.php?page=home&action=get
+            // http://localhost/Travel_Blogging_Platform/public/index.php?page=home&action=get
             include __DIR__.'/views/landing.php';
         }
         break;
@@ -83,7 +83,7 @@ switch($page){
                 include __DIR__ . '/views/blog_form.php';
             }
             else{
-                include __DIR__ . '/views/blog_form.php';
+                include __DIR__ . '/views/login.php';
             }
         }
         elseif ($action === 'get'){ // http://localhost/Travel_Blogging_Platform/public/index.php?page=blog&action=get&pageNo=1

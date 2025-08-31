@@ -29,7 +29,7 @@ class UserModel{
         $sql = "SELECT * FROM users";
         $stmt = $this->conn->prepare($sql);
         $stmt->execute();
-        return $stmt->get_result()->fetch_assoc();
+        return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
     // Insert user with optional profile image
