@@ -67,55 +67,56 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>User Profile - <?php echo htmlspecialchars($user['username']); ?></title>
     <link rel="stylesheet" href="../assets/css/profile.css">
- <style>
-     .success-message {
-    background: linear-gradient(135deg, #4CAF50, #2E7D32);
-    color: #fff;
-    padding: 14px 20px;
-    margin: 20px auto;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 500;
-    width: fit-content;
-    max-width: 80%;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-    animation: slideDown 0.6s ease, fadeOut 6s ease forwards;
-    position: relative;
-}
+    <style>
+        .success-message {
+            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            color: #fff;
+            padding: 14px 20px;
+            margin: 20px auto;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 500;
+            width: fit-content;
+            max-width: 80%;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+            animation: slideDown 0.6s ease, fadeOut 6s ease forwards;
+            position: relative;
+        }
 
-.success-message .checkmark {
-    font-size: 20px;
-    font-weight: bold;
-    background: white;
-    color: #4CAF50;
-    border-radius: 50%;
-    padding: 3px 6px;
-    display: inline-block;
-}
+        .success-message .checkmark {
+            font-size: 20px;
+            font-weight: bold;
+            background: white;
+            color: #4CAF50;
+            border-radius: 50%;
+            padding: 3px 6px;
+            display: inline-block;
+        }
 
-@keyframes slideDown {
-    from {
-        transform: translateY(-20px);
-        opacity: 0;
-    }
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
-}
+        @keyframes slideDown {
+            from {
+                transform: translateY(-20px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
 
-@keyframes fadeOut {
-    to {
-        opacity: 0;
-        transform: translateY(-10px);
-        visibility: hidden;
-    }
-}
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+                transform: translateY(-10px);
+                visibility: hidden;
+            }
+        }
+    
+    </style>
 
- </style>
 </head>
 <body>
 
@@ -167,8 +168,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
             <h2 id="usernameDisplay"><?php echo htmlspecialchars($user['username']); ?></h2>
             <p><strong>Email:</strong> <span id="emailDisplay"><?php echo htmlspecialchars($user['email']); ?></span></p>
             <p><strong>Phone:</strong> <span id="phoneDisplay"><?php echo htmlspecialchars($user['phone_number']); ?></span></p>
-            <p><strong>Total Comments:</strong> <?php echo isset($user['comment_count']) ? $user['comment_count'] : '0'; ?></p>
-            <p><strong>Total Blogs:</strong> <?php echo isset($user['blog_count']) ? $user['blog_count'] : '0'; ?></p>
+            <p><strong>Total Comments:</strong> <?php echo $comments ? count($comments) : '0'; ?></p>
+            <p><strong>Total Blogs:</strong> <?php echo $blogs ? count($blogs) : '0'; ?></p>
             <button id="editProfileBtn">✏️ Edit Profile</button>
         </div>
     </section>
