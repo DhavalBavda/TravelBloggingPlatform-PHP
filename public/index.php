@@ -43,7 +43,8 @@ switch($page){
                 if ($user) {
                     $_SESSION['userid'] = $user['id'];
                    
-                    header("Location: index.php?page=users&id=" . $user['id']);
+                    // header("Location: index.php?page=users&id=" . $user['id']);
+                    header("Location: index.php?page=home&action=get");
                     exit;
                 } else {
                     echo "Invalid login!";
