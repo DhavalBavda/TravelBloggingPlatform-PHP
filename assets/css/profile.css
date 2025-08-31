@@ -1,0 +1,159 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* Header */
+header {
+  background-color: #3498db;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+header h1 {
+  font-size: 24px;
+}
+
+/* Main */
+main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 20px;
+}
+
+/* User Details Section */
+.user-details {
+  display: flex;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+}
+
+.profile-pic {
+  flex: 1 1 150px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 20px;
+}
+
+.profile-pic img {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 10px;
+}
+
+.profile-pic button {
+  padding: 8px 12px;
+  border: none;
+  background-color: #3498db;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.profile-pic button:hover {
+  background-color: #2980b9;
+}
+
+.user-info {
+  flex: 2 1 300px;
+}
+
+.user-info h2 {
+  margin-bottom: 10px;
+}
+
+.user-info p {
+  margin-bottom: 6px;
+}
+
+/* Comment Section */
+.comment-section,
+.blog-section {
+  margin-bottom: 30px;
+}
+
+.comment-section h2,
+.blog-section h2 {
+  margin-bottom: 15px;
+  color: #3498db;
+}
+
+.comment-card,
+.blog-card {
+  background-color: #fff;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+  margin-bottom: 15px;
+}
+
+.comment-card button,
+.blog-card button {
+  padding: 6px 12px;
+  border: none;
+  background-color: #e74c3c;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  margin-top: 10px;
+}
+
+.comment-card button:hover,
+.blog-card button:hover {
+  background-color: #c0392b;
+}
+
+.blog-card a {
+  display: inline-block;
+  margin-top: 10px;
+  text-decoration: none;
+  color: #3498db;
+}
+
+.blog-card a:hover {
+  text-decoration: underline;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 15px 0;
+  background-color: #eee;
+  margin-top: 40px;
+}
+
+/* Responsive */
+@media (max-width: 700px) {
+  .user-details {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profile-pic {
+    margin-right: 0;
+    margin-bottom: 15px;
+  }
+
+  .user-info {
+    text-align: center;
+  }
+}
