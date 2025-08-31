@@ -2,6 +2,8 @@
 require_once __DIR__."/../config/dbconfig.php";
 require_once __DIR__."/../services/user_services.php";
 require_once __DIR__."/../services/blog_services.php";
+require_once __DIR__."/../services/comment_services.php";
+
 
 // ✅ Always start the session before using $_SESSION
 session_start();
@@ -12,6 +14,7 @@ $id     = $_GET['id']     ?? null;
 
 $userService = new UserService($conn);
 $blogService=new BlogService($conn);
+$commentService=new CommentService($conn);
 
 
 switch($page){
@@ -21,6 +24,11 @@ switch($page){
             $userid = $_SESSION['userid'];
             $user = $userService->getUserById($userid);
              $blogs = $blogService->getBlogsByUserId($userid);
+             $comments = $commentService->getCommentsByUser($userid);
+
+
+             
+
             include __DIR__ . '/views/user_profile.php';
         }
         break;

@@ -1,6 +1,6 @@
 <?php
 
-include '../helper/uuid_generator.php';
+require_once __DIR__."/../helper/uuid_generator.php";
 
 
 

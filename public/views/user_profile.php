@@ -145,30 +145,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
             </form>
         </div>
     </div>
-
-    <!-- User Comments -->
-    <section class="comment-section">
-        <h2>Your Comments</h2>
-        <?php if (isset($comments) && !empty($comments)): ?>
-            <?php foreach ($comments as $comment): ?>
-                <div class="comment-card">
-                    <p><strong>Comment:</strong> <?php echo htmlspecialchars($comment['content']); ?></p>
-                    <p><strong>Blog Title:</strong> <?php echo htmlspecialchars($comment['blog_title']); ?></p>
-                    <form method="POST" style="display: inline;">
-                        <input type="hidden" name="deleteComment" value="1">
-                        <input type="hidden" name="commentid" value="<?php echo htmlspecialchars($comment['id']); ?>">
-                        <button type="submit" onclick="return confirmDelete('comment')">Delete Comment</button>
-                    </form>
-                </div>
-            <?php endforeach; ?>
-        <?php else: ?>
+<!-- User Comments -->
+<section class="comment-section">
+    <h2>Your Comments</h2>
+    <?php if (isset($comments) && !empty($comments)): ?>
+        <?php foreach ($comments as $comment): ?>
             <div class="comment-card">
-                <p><strong>Comment:</strong> Habibi Come To Dubai</p>
-                <p><strong>Blog Title:</strong> This is the To Anfare</p>
-                <button onclick="confirmDelete('comment')">Delete Comment</button>
+                <p><strong>Comment:</strong> <?= htmlspecialchars($comment['COMMENT']); ?></p>
+                <p><strong>Blog Title:</strong> <?= htmlspecialchars($comment['BLOG_TITLE']); ?></p>
+                <p><small><em>Posted on: <?= htmlspecialchars($comment['CREATEDDATE']); ?></em></small></p>
+                
+                <form method="POST" style="display: inline;">
+                    <input type="hidden" name="deleteComment" value="1">
+                    <input type="hidden" name="commentid" value="<?= htmlspecialchars($comment['COMMENTID']); ?>">
+                    <button type="submit" onclick="return confirm('Are you sure you want to delete this comment?')">
+                        Delete Comment
+                    </button>
+                </form>
             </div>
-        <?php endif; ?>
-    </section>
+        <?php endforeach; ?>
+    <?php else: ?>
+        <div class="comment-card">
+            <p><strong>No comments yet!</strong></p>
+        </div>
+    <?php endif; ?>
+</section>
+
 
     <!-- User Blogs -->
     <section class="blog-section">

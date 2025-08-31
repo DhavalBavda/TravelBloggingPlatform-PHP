@@ -1,6 +1,6 @@
 <?php
 
-include "../helper/uuid_generator.php";
+require_once __DIR__."/../helper/uuid_generator.php";
 
 class CommentModel {
 
@@ -128,6 +128,36 @@ class CommentModel {
             return false;
         }
     }
+
+
+    
+// Fetch comments by User ID (with Blog Title)
+public function get_comments_byuserid($userid, $limit = 10, $offset = 0) {
+    try {
+        $stmt = $this->conn->prepare(
+            "SELECT C.COMMENTID, C.COMMENT, C.CREATEDDATE, 
+                    B.BLOGID, B.TITLE AS BLOG_TITLE
+             FROM COMMENTS C
+             INNER JOIN BLOGS B ON C.BLOGID = B.BLOGID
+             WHERE C.USERID = ?
+             ORDER BY C.CREATEDDATE DESC
+             LIMIT ? OFFSET ?"
+        );
+        $stmt->bind_param('sii', $userid, $limit, $offset);
+
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+
+    } catch (\Throwable $th) {
+        error_log("Error get_comments_byuserid: " . $th->getMessage());
+        return null;
+    }
+}
+
+
+
+    
 
     // Delete comment
     public function delete_comment($commentid) {
