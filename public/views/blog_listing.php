@@ -89,7 +89,7 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
 <header class="navbar">
     <nav>
         <ul>
-            <li><a href="#">Home</a></li>
+            <li><a href="?page=home&action=get">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Contact</a></li>
             <?php if ($isLoggedIn): ?>
