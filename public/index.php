@@ -32,6 +32,13 @@ switch($page){
         }
         break;
 
+    case 'home':
+        if ($action === 'get'){
+            http://localhost/Travel_Blogging_Platform/public/index.php?page=home&action=get
+            include __DIR__.'/views/landing.php';
+        }
+        break;
+        
     default:
         echo "Page not found!";
 }

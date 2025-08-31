@@ -30,12 +30,12 @@ class UserModel{
             $conn->query($userTable);
 
             if ($conn->query($userTable)==True){
-                echo "<br/> Kya Baat Hai Bhai Tu To Developer Nikala , Table Bana Diya Bhai , Pretty Impresive, Enjoy The User Table Bro. <br/>";
+               // echo "<br/> Kya Baat Hai Bhai Tu To Developer Nikala , Table Bana Diya Bhai , Pretty Impresive, Enjoy The User Table Bro. <br/>";
 
             }
 
             else {
-                echo " Error Bro Dekh Tune Kya Kiya , Coding Nahi AAti To Mat Kiya Karna ".$conn->error;
+                //echo " Error Bro Dekh Tune Kya Kiya , Coding Nahi AAti To Mat Kiya Karna ".$conn->error;
 
             }
         }

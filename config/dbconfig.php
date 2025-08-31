@@ -20,11 +20,11 @@ if($conn->connect_error){
 $sql="create database if not exists $dbname";
 
 if($conn->query($sql)==TRUE){
-    echo "Database '$dbname' created Successfully";
+    //echo "Database '$dbname' created Successfully";
 
 }
 else{
-    echo "Error Creating Database :".$conn->error;
+    //echo "Error Creating Database :".$conn->error;
 
 }
 

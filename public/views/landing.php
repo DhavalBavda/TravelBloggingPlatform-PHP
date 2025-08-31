@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;600&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="../../assets/style.css">
+    <link rel="stylesheet" href="../assets/css/style.css">
 </head>
 <body>
     <header class="navbar">
@@ -28,7 +28,7 @@
     <img src="https://t3.ftcdn.net/jpg/05/49/37/30/360_F_549373036_sjqy4Y3BUfFKAAELVfvOw0gIDAZ6QmH6.jpg" alt="Hero Travel">
     <!-- <h1>Blog your best<br>moment</h1> -->
     <div class="hero-text">
-        <img src="../../assets/Blog_head.png">
+        <img src="../assets/images/Blog_head.png">
     </div>
   </div>
 </section>
@@ -40,9 +40,9 @@
       and every journey leaves us a little different than we were before.”</p>
   </div>
   <div class="below-right">
-    <img src="../../assets/img1.png" alt="Travel 2">
-    <img src="../../assets/img2.png" alt="Travel 3">
-    <img src="../../assets/img3.png" alt="Travel 4">
+    <img src="../assets/images/img1.png" alt="Travel 2">
+    <img src="../assets/images/img2.png" alt="Travel 3">
+    <img src="../assets/images/img3.png" alt="Travel 4">
   </div>
 </section>
 
@@ -61,14 +61,14 @@
   </div>
 
   <div class="blog-right">
-    <img src="../../assets/Blog_head2.png" alt="On The Blog" class="blog-title-img">
+    <img src="../assets/images/Blog_head2.png" alt="On The Blog" class="blog-title-img">
     <button class="explore-btn">Explore Blogs</button>
   </div><br><br>
 </section>
 
 <section class="about-us">
   <div class="about-container">
-    <img src="../../assets/Blog_head3.png" alt="About us" style="height: 150px;">
+    <img src="../assets/images/Blog_head3.png" alt="About us" style="height: 150px;">
     <p>
       We are passionate explorers, storytellers, and creators who love sharing
       unique travel experiences, hidden gems, and inspiring stories.  
