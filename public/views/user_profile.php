@@ -161,7 +161,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
             <p><strong>Phone:</strong> <span id="phoneDisplay"><?php echo htmlspecialchars($user['phone_number']); ?></span></p>
             <p><strong>Total Comments:</strong> <?php echo $comments ? count($comments) : '0'; ?></p>
             <p><strong>Total Blogs:</strong> <?php echo $blogs ? count($blogs) : '0'; ?></p>
-            <button id="editProfileBtn">✏️ Edit Profile</button>
+            <button id="editProfileBtn">Edit Profile</button>
         </div>
     </section>
 

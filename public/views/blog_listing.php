@@ -115,12 +115,12 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
 </header>
 
 <section class="hero">
-    <h1>Discover Amazing Stories</h1>
+    <img src="../assets/images/Blog_head1.png">
     <p>Explore a world of creativity, inspiration, and shared experiences from our community of writers</p>
 </section>
 
 <section class="container">
-    <a href="#" class="create-blog-btn">✍️ Create New Blog</a>
+    <a href="#" class="create-blog-btn">Create New Blog</a>
 
     <form class="search-bar" method="GET" action="">
         <input type="hidden" name="page" value="blog">
