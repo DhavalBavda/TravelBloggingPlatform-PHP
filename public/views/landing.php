@@ -69,6 +69,7 @@ $isLoggedIn = isset($_SESSION['userid']);
       
             <ul class="navbar-links">
                 <li><a href="#">Home</a></li>
+                <li><a href="index.php?page=blog&action=get">Blogs</a></li>
                 <?php if ($isLoggedIn): ?>
 					<li>
 						<button class="logout-btn" id="user-profile-btn" data-user-id="<?= htmlspecialchars($_SESSION['userid']) ?>">

@@ -105,6 +105,7 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
 
         <ul class = "navbar-links">
             <li><a href="?page=home&action=get">Home</a></li>
+            <li><a href="#">Blogs</a></li>
             <?php if ($isLoggedIn): ?>
                 <li><button class="user-profile-btn" data-user-id="<?= htmlspecialchars($_SESSION['userid']) ?>" >PROFILE</button></li>
                 <li>
