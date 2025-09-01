@@ -1,7 +1,7 @@
 <?php
-require_once __DIR__.'/UploaderInterface.php';
+require_once __DIR__.'/FileUploader.php';
 
-class LoacalUploader implements UploaderInterface{
+class LoacalUploader implements FileUploader{
     
     public function fileUpload(array $files, string $uploadDir, int $maxSize, array $allowedExt) : array{
         $savedFilenames = [];
