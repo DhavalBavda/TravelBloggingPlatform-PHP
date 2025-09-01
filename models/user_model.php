@@ -24,7 +24,6 @@ class UserModel{
         $this->conn->query($userTable);
     }
 
-    // Get all the users
     public function get_allusers(){
         $sql = "SELECT * FROM users";
         $stmt = $this->conn->prepare($sql);
@@ -32,7 +31,6 @@ class UserModel{
         return $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
     }
     
-    // Insert user with optional profile image
     public function insert_user($username, $email, $phone_number, $pass, $image = '') {
         $id = Generate_UUID();
         $hashpassword = password_hash($pass, PASSWORD_BCRYPT);
@@ -45,7 +43,6 @@ class UserModel{
         return $stmt->execute() ? "User created successfully!" : "Error creating user: " . $stmt->error;
     }
 
-    // Get user by ID
     public function get_user($id) {
         $sql = "SELECT * FROM users WHERE id = ?";
         $stmt = $this->conn->prepare($sql);
@@ -54,7 +51,6 @@ class UserModel{
         return $stmt->get_result()->fetch_assoc();
     }
 
-    // Update user details (username, phone, optionally image)
     public function update_user($id, $username, $phone_number, $image = null) {
         if($image) {
             $sql = "UPDATE users SET username = ?, phone_number = ?, image = ? WHERE id = ?";
@@ -90,27 +86,6 @@ class UserModel{
     
 
 }
-
-///// Tesing For  Files 
-
-
-// $user = new UserModel();
-
-
-// // 1. user Create 
-// // echo $user->insert_user("Anu", "anu@example.com", "987652109788", "mypassword");
-
-// // 2. Read User (replace with actual UUID from DB after insert)
-// $someId = "ad0da06e-c8cc-441a-a213-475e527e754e"; 
-// // $data = $user->get_user($someId);
-// // if ($data) {
-// //     echo "<br/>  User Found: " . $data['username'] . " (" . $data['email'] . ")<br>";
-// // } else {
-// //     echo " User not found<br>";
-// // }
-
-// // 3. Update User
-// echo $user->update_user($someId, "Anu Updated", "999999999");
-
+ 
 
 ?>

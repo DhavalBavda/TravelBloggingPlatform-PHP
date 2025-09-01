@@ -16,7 +16,6 @@
     </div>
 
     <script>
-        // Clear previous input values on page load
         window.addEventListener('DOMContentLoaded', () => {
             const form = document.getElementById('loginForm');
             if (form) form.reset();

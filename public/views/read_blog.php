@@ -7,7 +7,6 @@ if (!$blogId) {
     exit;
 }
 
-// Fetch single blog from service
 $blog = $blogService->getBlogById($blogId);
 if (!$blog) {
     echo "Blog not found.";
@@ -23,29 +22,22 @@ if (!empty($blog['IMAGES'])) {
     $images = array_map('trim', explode(',', $blog['IMAGES']));
 }
 
-// Fetch comments for this blog
 $comments = $commentService->getCommentsByBlog($blogId);
 
 function formatBlogContent($content) {
-    // Convert literal "\n" to real newlines
     $content = str_replace('\n', "\n", $content);
 
-    // Escape HTML to prevent XSS
     $safeContent = htmlspecialchars($content);
 
-    // Normalize line endings
     $safeContent = str_replace(["\r\n", "\r"], "\n", $safeContent);
 
-    // Split by 2 or more consecutive line breaks
     $paragraphs = preg_split("/\n{2,}/", $safeContent);
 
-    // Wrap each paragraph in <p> tags, replacing single line breaks with <br>
     $formatted = '';
     foreach ($paragraphs as $para) {
 
         $para = nl2br(trim($para));
         if ($para === '') continue;
-        // Replace single line breaks with <br>
         $para = nl2br($para);
         $formatted .= "<p>{$para}</p>\n";
 
@@ -54,13 +46,11 @@ function formatBlogContent($content) {
     return $formatted;
 }
 
-// Handle new comment submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
     if ($isLoggedIn) {
         $commentText = trim($_POST['comment']);
         if ($commentText !== '') {
             $commentService->addComment($blogId, $_SESSION['userid'], $commentText);
-            // Refresh the page to show new comment
             header("Location: ?page=blog&action=getbyid&id=$blogId");
             exit;
         }
@@ -81,7 +71,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
     <link rel="stylesheet" href="../assets/css/blog_listing.css">
 
     <style>
-        /* Full blog content style */
         .full-blog-content {
             max-width: 800px;
             margin: 40px auto;
@@ -99,7 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
             font-family: 'Poppins', sans-serif;
         }
 
-        /* Paragraphs */
         .full-blog-content p {
             margin: 1.2em 0;
             line-height: 1.8;
@@ -107,7 +95,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
             color: #444;
         }
 
-        /* Headings inside content */
         .full-blog-content h2 {
             font-size: 2rem;
             margin: 2em 0 1em 0;
@@ -122,7 +109,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
             color: #46816b;
         }
 
-        /* Inline images inside content */
         .full-blog-content img {
             max-width: 100%;
             display: block;
@@ -130,7 +116,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
             border-radius: 12px;
         }
 
-        /* Blockquotes */
         .full-blog-content blockquote {
             border-left: 4px solid #46816b;
             margin: 20px 0;
@@ -139,7 +124,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
             font-style: italic;
         }
 
-        /* Links */
         .full-blog-content a {
             color: #46816b;
             text-decoration: underline;
@@ -211,8 +195,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
             list-style: none;
             padding: 0;
             margin: 0;
-            max-height: 300px; /* fixed height */
-            overflow-y: auto;  /* vertical scroll */
+            max-height: 300px; 
+            overflow-y: auto;   
             border-top: 1px solid #ddd;
             border-bottom: 1px solid #ddd;
             padding: 10px 0;
@@ -278,7 +262,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
         const isLoggedIn = <?= json_encode($isLoggedIn) ?>;
 
         document.addEventListener('DOMContentLoaded', () => {
-            // Profile / login button logic
             if (isLoggedIn) {
                 const profileBtn = document.querySelector('.user-profile-btn');
                 if (profileBtn) {
@@ -309,7 +292,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
                 }
             }
 
-            // Full blog image slider
             const slider = document.querySelector('.blog-slider-full');
             if (slider) {
                 const images = slider.querySelectorAll('img');
@@ -354,7 +336,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
         <p>By <?= htmlspecialchars($blog['author_name']) ?> • <?= $formattedDate ?></p>
     </section>
 
-    <!-- Blog Slider -->
     <div class="blog-slider-full">
         <?php foreach($images as $img): ?>
             <img src="<?= htmlspecialchars('../media/blog_images/' . $img) ?>" alt="Blog Image">
@@ -365,7 +346,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
         <?= formatBlogContent($blog['CONTENT']) ?>
     </section>
 
-    <!-- Comments Section -->
     <section class="container comments-section">
         <h2>Comments (<?= $blog['TOTALCOMMENTS'] ?>)</h2>
 
@@ -387,7 +367,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
             <?php endif; ?>
         </ul>
 
-        <!-- Comment Form -->
         <?php if ($isLoggedIn): ?>
             <form method="POST" class="comment-form">
                 <textarea name="comment" placeholder="Write your comment..." required></textarea>

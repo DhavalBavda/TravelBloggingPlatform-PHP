@@ -15,16 +15,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $savedFilenames = [];
 
     if ($imageFiles && isset($imageFiles['name'])) {
-        // Loop through all uploaded images
         foreach ($imageFiles['name'] as $key => $name) {
             $tmpName = $imageFiles['tmp_name'][$key];
             $size    = $imageFiles['size'][$key];
             $error   = $imageFiles['error'][$key];
 
-            // Get file extension
             $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
 
-            // Validate extension and size
             if (($ext === 'jpg' || $ext === 'jpeg') && $size <= 1 * 1024 * 1024) { // 1 MB
                 $newName = uniqid() . "." . $ext;
                 $destination = $uploadDir . $newName;
@@ -36,10 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
-    // Create comma-separated string of filenames
     $imageString = implode(',', $savedFilenames);
 
-    // Call createBlog with images
     $blogService->createBlog($userid, $title, $shortdesc, $content, $imageString);
 
     header("Location: index.php?page=blog&action=get");

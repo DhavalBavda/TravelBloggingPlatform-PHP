@@ -5,7 +5,6 @@ require_once __DIR__."/../services/blog_services.php";
 require_once __DIR__."/../services/comment_services.php";
 
 
-// ✅ Always start the session before using $_SESSION
 session_start();
 
 $page   = $_GET['page']   ?? null;

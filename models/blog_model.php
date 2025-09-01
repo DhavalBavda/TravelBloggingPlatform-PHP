@@ -28,7 +28,6 @@ class BlogModel{
         }
     }
 
-        // GET ALL DATA WITH PAGINATION AND SINGLE BLOG DATA BY ID
     public function get_blogs($blogid = '', $limit = 10, $offset = 0, $search = ''){
         try {
             $stmt = NULL;
@@ -94,14 +93,12 @@ class BlogModel{
         }
     }
 
-        // GET USER WISE DATA WITH PAGINATION AND SINGLE BLOG DATA BY ID
     public function get_blogs_byuserid($authorid, $limit = 0, $offset = 0){
         try {
             $stmt = NULL;
 
             if($limit != 0){
 
-                // WITH PAGINATION
                 $stmt = $this->conn->prepare("SELECT * FROM BLOGS authorid = ? ORDER BY CREATEDDATE DESC LIMIT ? OFFSET ?");
                 $stmt->bind_param('sii', $authorid, $limit, $offset);
 
@@ -116,7 +113,6 @@ class BlogModel{
 
             if($stmt->execute()){
                 $result = $stmt->get_result();
-                // Always return an array (list of blogs for this author)
                 return $result->fetch_all(MYSQLI_ASSOC);                
             }
             else{
@@ -131,7 +127,6 @@ class BlogModel{
         }
     }
 
-        // INSERT DATA
     public function insert_blog($authorid, $title, $shortdesc, $content, $images = ''){
         try {
 
@@ -151,7 +146,6 @@ class BlogModel{
         }
     }
 
-        // UPDATE DATA
     public function update_blog($blogid, $title, $shortdesc, $content, $images ){
         try {
             $stmt = $this->conn->prepare(
@@ -176,7 +170,6 @@ class BlogModel{
         }
     }
 
-        // DELETE DATA
     public function delete_blog($blogid){
         try {
             
@@ -208,23 +201,4 @@ class BlogModel{
 
 
 
-// Test the blog 
-
-// $blogM = new BlogModel();
-
-// //  1. blog Create 
-//   echo $blogM->insert_blog('9d062656-d275-4b67-950c-8185cad5f88f', "My first Blog", 'Shoryt desc', 'dfsdfsdfsdfdfs dAFSDKFNSKDF SD FMSDKFNSKDF', 'DSDF.JPEG');
-
-// // 2. blog update 
-// echo $blogM->update_blog('1897c4f7-61f5-4b7c-8a84-a0ceaa2af46a', "My update blog", "short", 'dfsdf', 'img.jpg,')
-
-// // 3. get blogs 
-// echo json_encode($blogM->get_blogs('1897c4f7-61f5-4b7c-8a84-a0ceaa2af46a'));
-// echo json_encode($blogM->get_blogs('', 1, 1));
-
-// // 4. get by user id 
-// echo json_encode($blogM->get_blogs_byuserid('9d062656-d275-4b67-950c-8185cad5f88f'));
-
-// // 5. delete blog 
-// $blogM->delete_blog('1897c4f7-61f5-4b7c-8a84-a0ceaa2af46a');
 ?>

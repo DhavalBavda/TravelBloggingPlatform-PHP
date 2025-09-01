@@ -1,15 +1,12 @@
 <?php
 $isLoggedIn = isset($_SESSION['userid']);
 
-// Pagination parameters
-$limit = 3; // blogs per page
+$limit = 3; 
 $pageNum = isset($_GET['pageNo']) ? max(1, intval($_GET['pageNo'])) : 1;
 $offset = ($pageNum - 1) * $limit;
 
-// Search parameter
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-// Fetch blogs from service
 $blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
 
 ?>
@@ -160,7 +157,6 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
         <?php endif; ?>
     </div>
 
-    <!-- Pagination -->
     <?php if (!empty($blogsArr)): ?>
         <div class="pagination">
             <?php if ($pageNum > 1): ?>
@@ -185,7 +181,6 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
 
 </section>
 
-<!-- Footer Section -->
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-about">
