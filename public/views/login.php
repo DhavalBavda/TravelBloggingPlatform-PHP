@@ -6,7 +6,7 @@
 </head>
 <body>
     <div class="login-box">
-        <h2>Login</h2>
+        <img src="../assets/images/Login.png" style="height: 150px;">
         <form method="post" action="index.php?page=auth&action=login" id = "loginForm">
             <input type="text" name="email" placeholder="Email or Username" required><br>
             <input type="password" name="password" placeholder="Password" required><br>
