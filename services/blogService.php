@@ -7,7 +7,7 @@ class BlogService {
     private $userService;
 
     public function __construct($conn) {
-        $this->blogModel = new BlogModel($conn);
+        $this->blogModel = new Blog($conn);
         $this->userService = new UserService($conn);
     }
 

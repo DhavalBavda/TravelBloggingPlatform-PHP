@@ -8,7 +8,7 @@ class CommentService {
     private $userService;
 
     public function __construct($conn) {
-        $this->commentModel = new CommentModel($conn);
+        $this->commentModel = new Comment($conn);
         $this->userService = new UserService($conn);
     }
 

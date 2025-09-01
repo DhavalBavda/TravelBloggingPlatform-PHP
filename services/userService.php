@@ -5,7 +5,7 @@ class UserService {
     private $userModel;
 
     public function __construct($conn) {
-        $this->userModel = new UserModel($conn);
+        $this->userModel = new User($conn);
     }
 
     public function getAllUsers(){
