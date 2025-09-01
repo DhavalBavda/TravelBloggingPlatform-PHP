@@ -122,7 +122,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
             <li><a href="?page=home&action=get">Home</a></li>
             <li><a href="index.php?page=blog&action=get">Blogs</a></li>
             <?php if ($isLoggedIn): ?>
-                <li><button id="logout-btn-id" class="nav-btn logout">LOGOUT</button></li>
+                <li><button id="logout-btn-id" class="nav-btn-logout">LOGOUT</button></li>
             <?php endif; ?>
         </ul>
     </nav>
