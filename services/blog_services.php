@@ -39,24 +39,8 @@ class BlogService {
         return $allblog;
     }
 
-    public function getAllBlogs($blogid = '', $limit = 10, $offset = 0){
-        $allblog  = $this->blogModel->get_blogs($blogid, $limit, $offset);
-        $allUsers = $this->userService->getAllUsers();
-
-        // Build a quick lookup table of users by ID for faster access
-        $userMap = [];
-        foreach ($allUsers as $user) {
-            $userMap[$user['id']] = $user['username']; // You can also store the full user if needed
-        }
-
-        // Attach username to each blog
-        foreach ($allblog as &$blog) {
-            $authorId = $blog['AUTHORID'];
-
-            $blog['author_name'] = $userMap[$authorId] ?? 'Unknown';
-        }
-
-        return $allblog ;
+    public function getAllBlogs($blogid = '', $limit = 10, $offset = 0, $search = ''){
+        return $this->blogModel->get_blogs($blogid, $limit, $offset, $search);
     }
 
     public function updateBlog($blogid, $title, $shortdesc, $content, $images) {

@@ -10,7 +10,7 @@ $offset = ($pageNum - 1) * $limit;
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
 // Fetch blogs from service
-$blogsArr = $blogService->getAllBlogs('', $limit, $offset);
+$blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
 
 ?>
 
@@ -97,8 +97,13 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
 <body>
 
 <header class="navbar">
-    <nav>
-        <ul>
+    <nav class = "navbar-container">
+        
+        <div class="navbar-brand">
+            <a href="?page=home&action=get">Travelogue</a>
+        </div>
+
+        <ul class = "navbar-links">
             <li><a href="?page=home&action=get">Home</a></li>
             <?php if ($isLoggedIn): ?>
                 <li><button class="user-profile-btn" data-user-id="<?= htmlspecialchars($_SESSION['userid']) ?>" >PROFILE</button></li>
@@ -121,6 +126,8 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset);
     <a href="#" class="create-blog-btn">✍️ Create New Blog</a>
 
     <form class="search-bar" method="GET" action="">
+        <input type="hidden" name="page" value="blog">
+        <input type="hidden" name="action" value="get">
         <input type="text" name="search" placeholder="Search blogs..." value="<?= htmlspecialchars($search) ?>">
         <button type="submit">Search</button>
     </form>

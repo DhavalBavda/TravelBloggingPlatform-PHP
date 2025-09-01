@@ -289,6 +289,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
                         else alert("User ID not found.");
                     });
                 }
+                
+                const logoutBtn = document.querySelector('#logout-btn-id');
+                if (logoutBtn) {
+                    logoutBtn.addEventListener('click', function(e) {
+                        e.preventDefault();
+                        
+                        window.location.href = "?page=auth&action=logout";
+                        
+                    });
+                }
             } else {
                 const loginBtn = document.querySelector('.login-btn');
                 if (loginBtn) {
@@ -321,11 +331,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['comment'])) {
 <body>
 
     <header class="navbar">
-        <nav>
-            <ul>
+        <nav class = "navbar-container">
+            
+            <div class="navbar-brand">
+                <a href="?page=home&action=get">Travelogue</a>
+            </div>
+            
+            <ul class="navbar-links">
                 <li><a href="?page=home&action=get">Home</a></li>
                 <?php if ($isLoggedIn): ?>
                     <li><button class="user-profile-btn" data-user-id="<?= htmlspecialchars($_SESSION['userid']) ?>">PROFILE</button></li>
+                    <li><button id="logout-btn-id" class="user-profile-btn">LOGOUT</button></li>
                 <?php else: ?>
                     <li><button class="login-btn">Login</button></li>
                 <?php endif; ?>
