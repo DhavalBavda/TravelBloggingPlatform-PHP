@@ -13,7 +13,9 @@ body {
     min-height: 100vh;
 }
 
-/* Navbar */
+
+
+
 .navbar {
     background: #f9f9f9;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -22,35 +24,63 @@ body {
     top: 0;
     z-index: 1000;
 }
-
-.navbar nav {
+.navbar-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-
-.logo {
-    font-size: 20px;
-    font-weight: 700;
+.navbar-brand a {
+    font-family: 'Dancing Script', cursive;
+    font-size: 1.8rem;
+    font-weight: 600;
     color: #46816b;
+    text-decoration: none;
 }
-
-.navbar ul {
+.navbar-links {
     display: flex;
     gap: 20px;
     list-style: none;
     align-items: center;
+    margin: 0;
+    padding: 0;
 }
 
-.navbar a {
+.navbar-links a {
     text-decoration: none;
     color: #333;
     font-weight: 500;
-    transition: color 0.2s;
+    transition: color 0.3s ease;
 }
 
-.navbar a:hover {
+.navbar-links a:hover {
     color: #46816b;
+}
+
+.nav-btn-logout {
+    background: linear-gradient(135deg, #46816b, #5a9b7e);
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 25px;
+    cursor: pointer;
+    font-weight: 500;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px rgba(70, 129, 107, 0.3);
+}
+
+.nav-btn-logout:hover {
+    background: linear-gradient(135deg, #3a6b5a, #4a8568);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(70, 129, 107, 0.4);
+}
+
+.nav-btn-logout:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(70, 129, 107, 0.3);
 }
 
 .user-profile-btn, .login-btn {
