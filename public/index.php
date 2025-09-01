@@ -48,7 +48,10 @@ switch($page){
                     header("Location: index.php?page=home&action=get");
                     exit;
                 } else {
-                    echo "Invalid login!";
+                    echo "<script>
+                    alert('Invalid login!');
+                    window.location.href='index.php?page=auth&action=login';
+                  </script>";
                 }
             } else {
                 include __DIR__ . '/views/login.php';
