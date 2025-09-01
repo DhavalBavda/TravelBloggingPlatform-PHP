@@ -4,7 +4,7 @@ require_once __DIR__."/../helper/uuid_generator.php";
 
 
 
-class UserModel{
+class User{
 
     private $conn;
 
@@ -82,7 +82,12 @@ class UserModel{
         return null;
     }
 
-
+    public function delete_user($id){
+        $sql = "DELETE FROM USERS WHERE ID = ?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('s', $id);
+        return $stmt->execute() ? "User Deleted Sucessfully" : $stmt->error;
+    }
     
 
 }

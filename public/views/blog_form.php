@@ -1,8 +1,11 @@
 <?php
-require_once __DIR__."/../../services/blog_services.php";
+require_once __DIR__."/../../services/blogService.php";
+require_once __DIR__."/../../fileuploader/LocalUploader.php";
 
 // Directory to store uploaded images
 $uploadDir = __DIR__ . "/../../media/blog_images/";
+$maxSize = 1 * 1024 * 1024;
+$allowedExt = ['jpg', 'jpeg', 'png'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
@@ -12,26 +15,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $content   = $_POST['content'] ?? null;
 
     $imageFiles = $_FILES['images'] ?? null;
-    $savedFilenames = [];
+    $uploader = new LoacalUploader();
 
-    if ($imageFiles && isset($imageFiles['name'])) {
-        foreach ($imageFiles['name'] as $key => $name) {
-            $tmpName = $imageFiles['tmp_name'][$key];
-            $size    = $imageFiles['size'][$key];
-            $error   = $imageFiles['error'][$key];
+    $savedFilenames = $uploader->fileUpload($imageFiles, $uploadDir, $maxSize, $allowedExt) ?? [];
 
-            $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
+    // if ($imageFiles && isset($imageFiles['name'])) {
+    //     foreach ($imageFiles['name'] as $key => $name) {
+    //         $tmpName = $imageFiles['tmp_name'][$key];
+    //         $size    = $imageFiles['size'][$key];
+    //         $error   = $imageFiles['error'][$key];
 
-            if (($ext === 'jpg' || $ext === 'jpeg' || $ext === 'png') && $size <= 1 * 1024 * 1024) { // 1 MB
-                $newName = uniqid() . "." . $ext;
-                $destination = $uploadDir . $newName;
+    //         $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
 
-                if (move_uploaded_file($tmpName, $destination)) {
-                    $savedFilenames[] = $newName;
-                }
-            }
-        }
-    }
+    //         if (($ext === 'jpg' || $ext === 'jpeg' || $ext === 'png') && $size <= 1 * 1024 * 1024) { // 1 MB
+    //             $newName = uniqid() . "." . $ext;
+    //             $destination = $uploadDir . $newName;
+
+    //             if (move_uploaded_file($tmpName, $destination)) {
+    //                 $savedFilenames[] = $newName;
+    //             }
+    //         }
+    //     }
+    // }
 
     $imageString = implode(',', $savedFilenames);
 

@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . "/../../config/dbconfig.php";
-require_once __DIR__ . "/../../services/user_services.php";
+require_once __DIR__ . "/../../services/userService.php";
 
 // $id = $_GET['id'] ?? $_SESSION['userid'];
 $userService = new UserService($conn);

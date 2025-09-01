@@ -1,8 +1,9 @@
 <?php
 require_once __DIR__."/../config/dbconfig.php";
-require_once __DIR__."/../services/user_services.php";
-require_once __DIR__."/../services/blog_services.php";
-require_once __DIR__."/../services/comment_services.php";
+require_once __DIR__."/../services/userService.php";
+require_once __DIR__."/../services/adminUserService.php";
+require_once __DIR__."/../services/blogService.php";
+require_once __DIR__."/../services/commentService.php";
 
 
 session_start();
@@ -43,6 +44,11 @@ switch($page){
 
                 if ($user) {
                     $_SESSION['userid'] = $user['id'];
+                    
+                    $role = "admin";
+                    if($role === "admin"){
+                        $userService = new AdminUserService($conn);
+                    }
                    
                     // header("Location: index.php?page=users&id=" . $user['id']);
                     header("Location: index.php?page=home&action=get");

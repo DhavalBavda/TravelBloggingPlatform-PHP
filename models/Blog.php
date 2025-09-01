@@ -2,7 +2,7 @@
 
 require_once __DIR__."/../helper/uuid_generator.php";
 
-class BlogModel{
+class Blog{
     private $conn;
 
     public function __construct($conn) {

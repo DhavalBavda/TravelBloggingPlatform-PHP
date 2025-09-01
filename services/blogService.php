@@ -1,13 +1,13 @@
 <?php
-require_once __DIR__ . '/../models/blog_model.php';
-require_once __DIR__ . '/../services/user_services.php';
+require_once __DIR__ . '/../models/Blog.php';
+require_once __DIR__ . '/../services/userService.php';
 
 class BlogService {
     private $blogModel;
     private $userService;
 
     public function __construct($conn) {
-        $this->blogModel = new BlogModel($conn);
+        $this->blogModel = new Blog($conn);
         $this->userService = new UserService($conn);
     }
 
