@@ -5,7 +5,6 @@ require_once __DIR__."/../services/blog_services.php";
 require_once __DIR__."/../services/comment_services.php";
 
 
-// ✅ Always start the session before using $_SESSION
 session_start();
 
 $page   = $_GET['page']   ?? null;
@@ -45,10 +44,14 @@ switch($page){
                 if ($user) {
                     $_SESSION['userid'] = $user['id'];
                    
-                    header("Location: index.php?page=users&id=" . $user['id']);
+                    // header("Location: index.php?page=users&id=" . $user['id']);
+                    header("Location: index.php?page=home&action=get");
                     exit;
                 } else {
-                    echo "Invalid login!";
+                    echo "<script>
+                    alert('Invalid login!');
+                    window.location.href='index.php?page=auth&action=login';
+                  </script>";
                 }
             } else {
                 include __DIR__ . '/views/login.php';

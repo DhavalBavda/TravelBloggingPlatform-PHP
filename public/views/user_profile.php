@@ -7,13 +7,11 @@ $userService = new UserService($conn);
 $user = $userService->getUserById($id);
 
 
-// Check login
 $isLoggedIn = isset($_SESSION['userid']);
 
 
 $uploadDir = __DIR__ . "/../../media/profile_images/";
 
-// --- Handle Delete Blog ---
 if (isset($_POST['deleteBlog'])) {
     $blogid = $_POST['blogid'];
     $blogService->deleteBlog($blogid, $id);
@@ -22,7 +20,6 @@ if (isset($_POST['deleteBlog'])) {
     exit;
 }
 
-// --- Handle Delete Comment ---
 if (isset($_POST['deleteComment'])) {
     $commentid = $_POST['commentid'];
     $commentService->deleteComment($commentid, $id);
@@ -31,14 +28,12 @@ if (isset($_POST['deleteComment'])) {
     exit;
 }
 
-// Handle profile update
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !isset($_POST['deleteComment'])) {
     $userid = $_POST['userid'];
     $username = $_POST['username'];
     $phone_number = $_POST['phone_number'];
     $imagePath = null;
 
-    // Handle image upload
     if (isset($_FILES['profile_img']) && $_FILES['profile_img']['error'] === 0) {
         $filename = uniqid() . '_' . basename($_FILES['profile_img']['name']);
         $targetFile = $uploadDir . $filename;
@@ -47,14 +42,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
         }
     }
 
-    // Update user
     $result = $userService->updateUser($userid, $username, $phone_number, $imagePath);
     $_SESSION['message'] = $result;
 
-    // Refresh user data
     $user = $userService->getUserById($userid);
 
-    // Redirect to avoid form resubmission
     header("Location: index.php?page=users&id=$userid");
     exit;
 }
@@ -137,7 +129,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
 </header>
 
 <main>
-   <!-- Success Message -->
 <?php if (isset($_SESSION['message'])): ?>
     <div class="success-message">
         <span class="checkmark">✔</span>
@@ -148,7 +139,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
     </div>
 <?php endif; ?> 
 
-    <!-- User Details -->
     <section class="user-details">
         <div class="profile-pic">
             <img 
@@ -165,11 +155,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
             <p><strong>Phone:</strong> <span id="phoneDisplay"><?php echo htmlspecialchars($user['phone_number']); ?></span></p>
             <p><strong>Total Comments:</strong> <?php echo $comments ? count($comments) : '0'; ?></p>
             <p><strong>Total Blogs:</strong> <?php echo $blogs ? count($blogs) : '0'; ?></p>
-            <button id="editProfileBtn">✏️ Edit Profile</button>
+            <button id="editProfileBtn">Edit Profile</button>
         </div>
     </section>
 
-    <!-- Edit Profile Popup -->
     <div id="editProfilePopup" class="popup">
         <div class="popup-content">
             <span class="close-btn" id="closePopup">&times;</span>
@@ -190,7 +179,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
             </form>
         </div>
     </div>
-<!-- User Comments -->
 <section class="comment-section">
     <h2>Your Comments</h2>
     <?php if (isset($comments) && !empty($comments)): ?>
@@ -217,14 +205,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
 </section>
 
 
-    <!-- User Blogs -->
     <section class="blog-section">
         <h2>Your Blogs</h2>
         <div class="blog-container">
             <?php if (isset($blogs) && !empty($blogs)): ?>
                 <?php foreach ($blogs as $blog): ?>
                     <?php
-                    // Handle multiple images
                     $images = [];
                     if (!empty($blog['IMAGES'])) {
                         $images = array_map('trim', explode(',', $blog['IMAGES']));
@@ -287,7 +273,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
 </main>
 
 
-<!-- Footer Section -->
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-about">
@@ -314,7 +299,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
 </footer>
 
 <script>
-    // Confirm delete function
     function confirmDelete(type) {
         let message = '';
         if (type === 'blog') {
@@ -326,7 +310,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
         return confirm(message);
     }
 
-    // Edit Profile Popup functionality
     const editBtn = document.getElementById('editProfileBtn');
     const popup = document.getElementById('editProfilePopup');
     const closeBtn = document.getElementById('closePopup');
@@ -340,7 +323,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
             popup.style.display = 'none';
         });
 
-        // Close popup on outside click
         window.addEventListener('click', (e) => {
             if (e.target === popup) {
                 popup.style.display = 'none';
@@ -348,7 +330,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
         });
     }
 
-    // Form validation for edit profile
     const editForm = document.querySelector('#editProfilePopup form');
     if (editForm) {
         editForm.addEventListener('submit', function(e) {
@@ -369,7 +350,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
         });
     }
 
-    // Image slider functionality for multiple blog images
     function nextImage(button) {
         const blogCard = button.closest('.blog-card');
         const container = blogCard.querySelector('.blog-images-container');
@@ -417,7 +397,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && !isset($_POST['deleteBlog']) && !is
         });
     }
 
-    // Initialize image sliders
     document.addEventListener('DOMContentLoaded', function() {
         const blogCards = document.querySelectorAll('.blog-card');
         blogCards.forEach(card => {

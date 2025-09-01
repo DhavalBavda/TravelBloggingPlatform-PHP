@@ -16,8 +16,7 @@ class BlogService {
         return $this->blogModel->insert_blog($userid, $title, $shortdesc, $content, $images);
     }
 
-    // Get blogs by user id
-    public function getBlogsByUserId($userid, $limit = 0, $offset = 0) {
+     public function getBlogsByUserId($userid, $limit = 0, $offset = 0) {
         return $this->blogModel->get_blogs_byuserid($userid, $limit, $offset);
     }
 

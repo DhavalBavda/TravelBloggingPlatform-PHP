@@ -8,22 +8,18 @@ class UserService {
         $this->userModel = new UserModel($conn);
     }
 
-    //Get all users
     public function getAllUsers(){
         return $this->userModel->get_allusers();
     }
 
-    // Create user
     public function createUser($username, $email, $phone_number, $password, $image = '') {
         return $this->userModel->insert_user($username, $email, $phone_number, $password, $image);
     }
 
-    // Get user by ID
     public function getUserById($id) {
         return $this->userModel->get_user($id);
     }
 
-    // Update user with optional profile image
     public function updateUser($id, $username, $phone_number, $image = null) {
         return $this->userModel->update_user($id, $username, $phone_number, $image);
     }

@@ -9,7 +9,6 @@ class CommentModel {
     public function __construct($conn) {
         $this->conn = $conn;
             
-        // Create Comments Table
         $commentTable = "CREATE TABLE IF NOT EXISTS COMMENTS(
             COMMENTID CHAR(36) PRIMARY KEY,
             BLOGID CHAR(36) NOT NULL,
@@ -22,11 +21,9 @@ class CommentModel {
 
         $this->conn->query($commentTable);
 
-        // Drop triggers if exist
         $this->conn->query("DROP TRIGGER IF EXISTS increment_comment_count");
         $this->conn->query("DROP TRIGGER IF EXISTS decrement_comment_count");
 
-        // Create triggers
         $this->conn->query("
         CREATE TRIGGER increment_comment_count
         AFTER INSERT ON COMMENTS
@@ -50,7 +47,6 @@ class CommentModel {
         ");
     }
 
-    // Fetch comments by blog ID
     public function get_comment_byblogid($blogid, $limit = 0, $offset = 0) {
         try {
             if ($limit > 0) {
@@ -75,7 +71,6 @@ class CommentModel {
         }
     }
 
-    // Fetch all comments or single comment
     public function get_comments($commentid = '', $limit = 10, $offset = 0) {
         try {
             if ($commentid === '') {
@@ -100,7 +95,6 @@ class CommentModel {
         }
     }
 
-    // Insert comment
     public function insert_comment($blogid, $userid, $comment) {
         try {
             $commentid = Generate_UUID();
@@ -115,7 +109,6 @@ class CommentModel {
         }
     }
 
-    // Update comment
     public function update_comment($commentid, $comment) {
         try {
             $stmt = $this->conn->prepare(
@@ -131,7 +124,6 @@ class CommentModel {
 
 
     
-// Fetch comments by User ID (with Blog Title)
 public function get_comments_byuserid($userid, $limit = 10, $offset = 0) {
     try {
         $stmt = $this->conn->prepare(
@@ -158,8 +150,6 @@ public function get_comments_byuserid($userid, $limit = 10, $offset = 0) {
 
 
     
-
-    // Delete comment
     public function delete_comment($commentid) {
         try {
             $stmt = $this->conn->prepare(

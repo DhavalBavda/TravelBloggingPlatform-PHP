@@ -1,15 +1,12 @@
 <?php
 $isLoggedIn = isset($_SESSION['userid']);
 
-// Pagination parameters
-$limit = 3; // blogs per page
+$limit = 3; 
 $pageNum = isset($_GET['pageNo']) ? max(1, intval($_GET['pageNo'])) : 1;
 $offset = ($pageNum - 1) * $limit;
 
-// Search parameter
 $search = isset($_GET['search']) ? trim($_GET['search']) : '';
 
-// Fetch blogs from service
 $blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
 
 ?>
@@ -119,12 +116,12 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
 </header>
 
 <section class="hero">
-    <h1>Discover Amazing Stories</h1>
+    <img src="../assets/images/Blog_head1.png">
     <p>Explore a world of creativity, inspiration, and shared experiences from our community of writers</p>
 </section>
 
 <section class="container">
-    <a href="#" class="create-blog-btn">✍️ Create New Blog</a>
+    <a href="#" class="create-blog-btn">Create New Blog</a>
 
     <form class="search-bar" method="GET" action="">
         <input type="hidden" name="page" value="blog">
@@ -161,7 +158,6 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
         <?php endif; ?>
     </div>
 
-    <!-- Pagination -->
     <?php if (!empty($blogsArr)): ?>
         <div class="pagination">
             <?php if ($pageNum > 1): ?>
@@ -186,7 +182,6 @@ $blogsArr = $blogService->getAllBlogs('', $limit, $offset, $search);
 
 </section>
 
-<!-- Footer Section -->
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-about">

@@ -8,7 +8,7 @@
 </head>
 <body>
     <div class="register-box">
-        <h2>Register</h2>
+        <img src="../assets/images/Register.png" style="height: 150px;">
         <form method="post" action="index.php?page=auth&action=register">
             <input type="text" name="username" placeholder="Username" required><br>
             <input type="email" name="email" placeholder="Email" required><br>
