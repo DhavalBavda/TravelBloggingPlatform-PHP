@@ -1,8 +1,8 @@
 <?php
 require_once __DIR__."/../config/dbconfig.php";
-require_once __DIR__."/../services/user_services.php";
-require_once __DIR__."/../services/blog_services.php";
-require_once __DIR__."/../services/comment_services.php";
+require_once __DIR__."/../services/userService.php";
+require_once __DIR__."/../services/blogService.php";
+require_once __DIR__."/../services/commentService.php";
 
 
 session_start();

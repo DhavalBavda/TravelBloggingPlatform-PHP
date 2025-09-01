@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . "/../models/comment_model.php";
-require_once __DIR__ . '/../services/user_services.php';
+require_once __DIR__ . "/../models/Comment.php";
+require_once __DIR__ . '/../services/userService.php';
 
 class CommentService {
 

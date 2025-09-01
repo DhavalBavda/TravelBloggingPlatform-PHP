@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__."/../../services/blog_services.php";
+require_once __DIR__."/../../services/blogService.php";
 
 // Directory to store uploaded images
 $uploadDir = __DIR__ . "/../../media/blog_images/";

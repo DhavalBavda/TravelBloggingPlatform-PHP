@@ -1,6 +1,6 @@
 <?php
-require_once __DIR__ . '/../models/blog_model.php';
-require_once __DIR__ . '/../services/user_services.php';
+require_once __DIR__ . '/../models/Blog.php';
+require_once __DIR__ . '/../services/userService.php';
 
 class BlogService {
     private $blogModel;
